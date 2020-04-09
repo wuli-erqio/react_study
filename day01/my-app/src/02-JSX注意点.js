@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// 引入css文件
-import './css/index.css'
-
+/*
+  注意点
+*/
 const title = (
-  <h1 className="list1" style={{color: 'red', background: 'skyblue'}}>
-    JSX样式处理
+  <h1 className="title">Hello JSX
+    <span />
   </h1>
 )
 

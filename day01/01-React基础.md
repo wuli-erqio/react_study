@@ -37,4 +37,4 @@ ReactDOM.render()渲染
 ### 3.1 使用React脚手架初始化项目
 > 初始化项目，命令： <font color=red>npx create-react-app my-app</font>
 ### 在脚手架中使用React
-> 1.导入react和react-dom两个包<br>import React from 'react'<br>import ReactDOM from 'react-dom'<br>2.调用<font color=skyblue>React.createElement()</font>方法创建react元素<br>3.调用<font color=red>ReactDOM.render()</font>方法渲染react元素到页面中
+> 1.导入react和react-dom两个包<br>import React from 'react'<br>import ReactDOM from 'react-dom'<br>2.调用<font color=skyblue>React.createElement()</font>方法创建react元素<br>const title = React.createElement('h1', null, 'hello react')<br>3.调用<font color=red>ReactDOM.render()</font>方法渲染react元素到页面中<br>ReactDOM.render(title, document.getElementById('root'))
