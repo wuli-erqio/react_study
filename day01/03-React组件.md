@@ -17,7 +17,7 @@ function Hello() {
 ReactDOM.render(<Hello />, root)
 ```
 
-### 2.1 使用类创建组件
+### 2.2 使用类创建组件
 <font color=pink>例子：08-React类创建组件</font>
 * 类组件：使用ES6的class创建的组件
 * 约定一： 类名必须以<font color=red>大写字母开头</font>
@@ -36,8 +36,32 @@ class Hello extends React.Component {
 // 渲染
 ReactDOM.render(<Hello />, document.getElementById('root'))
 ```
-## 3.React时间处理
+
+### 2.3 抽离为独立的JS文件
+<font color=pink>例子：Hello.js + 09-抽离组件</font>
+> 组件作为一个独立的个体，一般都会放到一个<font color=red>单独的JS文件中</font>
+1. 创建Hello.js
+2. 在Hello.js中导入React
+3. 创建组件(函数 或 类)
+4. 在hello.js中导出该组件
+5. 在index.js中导入Hello组件
+6. 渲染组件
+
+## 3.React时事件处理
+### 3.1 事件绑定
+<font color=pink>例子：10-事件绑定</font>
+* React事件绑定语法与DOM事件语法相似
+* 语法：<font color=red>on+事件名称=(事件处理程序)</font>，比如：onClick={()=>{}}
+* 注意：<font color=red>React事件采用**驼峰命名法**</font>，比如：onMouseEnter,onFocus
+
+### 3.2 事件对象
+<font color=pink>例子：11-事件对象</font>
+* 可以通过<font color=red>事件处理程序的参数</font>获取事件对象
+* React中的事件对象叫做：<font color=skyblue>合成事件</font>（对象）
+* 合成事件：兼容所有浏览器，无需担心跨浏览器兼容性问题
+
 ## 4.有状态组件和无状态组件
 ## 5.组件中的state和setState()
 ## 6.事件绑定this指向
 ## 7.表单处理
+
