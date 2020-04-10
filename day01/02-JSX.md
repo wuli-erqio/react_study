@@ -74,7 +74,7 @@ const list = (
 ```
 
 # JSX的样式处理
-<font color=pink>例子：index.js</font>
+<font color=pink>例子：06-JSX样式处理</font>
 ### 1.行内样式----style
 ```
   <h1 style={{color: 'red', background: 'skyblue'}}>
