@@ -2,14 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends React.Component {
-  state = {
-    count: 0
+  constructor() {
+    super()
+    this.state = {
+      count: 0
+    }
+    this.onIncrement = this.onIncrement.bind(this)
   }
 
   // 事件处理程序
-  // 这里直接这样写会找不到this,是undefined
-  // 可以将事件处理程序改成箭头函数
-  onIncrement =  () => {
+  onIncrement () {
     this.setState({
       count: this.state.count + 1
     })

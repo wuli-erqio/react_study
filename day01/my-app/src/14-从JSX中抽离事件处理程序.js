@@ -9,7 +9,7 @@ class App extends React.Component {
   // 事件处理程序
   // 这里直接这样写会找不到this,是undefined
   // 可以将事件处理程序改成箭头函数
-  onIncrement =  () => {
+  onIncrement () {
     this.setState({
       count: this.state.count + 1
     })
