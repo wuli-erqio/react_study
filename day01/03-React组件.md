@@ -139,7 +139,8 @@ ReactDOM.render(<Hello />, document.getElementById('root'))
 * 说明： 借助于ref,使用原生DOM方式来获取表单元素
 * ref的作用： 获取DOM或组件
 #### 步骤
-<font color=pink>例子：20-非受控组件事例</font>
+<font color=pink>例子：index.js</font>
 1. 调用React.createRef()方法创建一个ref对象
 2. 将创建好的ref对象添加到文本框中
 3. 通过ref对象获取到文本框的值
+
