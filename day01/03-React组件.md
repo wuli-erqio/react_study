@@ -113,5 +113,33 @@ ReactDOM.render(<Hello />, document.getElementById('root'))
 * 利用箭头函数形式的class实例方法
 * 注意：改语法是实验行语法，但是，由于babel的存在可以直接使用
 ### 总结
-1. 推荐：<font color=red>使用class的实例方法</font>
+推荐：<font color=red>使用class的实例方法</font>
+
 ## 7.表单处理
+### 7.1 受控组件
+* HTML中表单元素是可输入的， 也有自己的可变状态
+* React中可变状态通常保存在state中，并且只能通过setState()方法来修改
+* React将state与表单元素的value绑定到一起，由<font color=red>state的值来控制表单元素的值</font>
+* 受控组件：其值受到React控制的表单元素
+#### 步骤
+<font color=pink>例子：18-受控组件事例</font>
+1. 在state中添加一个状态， 作为表单元素的value值(控制表单元素的来源)
+2. 给表单绑定change事件，将表单元素的值设置为state的值(控制表单元素值的变化)
+
+### 多表单元素优化
+* 问题：每个表单元素都有一个单独的事件处理程序处理太繁琐
+* 优化：使用一个事件处理程序同时处理多个表单元素
+#### 步骤
+<font color=pink>例子：19-受控组件事例优化</font>
+
+1. 给表单元素添加name属性，名称与state相同
+2. 根据表单元素类型获取对应的值
+3. 在change事件处理程序中通过[name]来修改对应的state
+### 7.1 非受控组件
+* 说明： 借助于ref,使用原生DOM方式来获取表单元素
+* ref的作用： 获取DOM或组件
+#### 步骤
+<font color=pink>例子：20-非受控组件事例</font>
+1. 调用React.createRef()方法创建一个ref对象
+2. 将创建好的ref对象添加到文本框中
+3. 通过ref对象获取到文本框的值

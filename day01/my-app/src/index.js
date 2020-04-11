@@ -2,23 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends React.Component {
-  state = {
-    count: 0
+  constructor() {
+    super()
+    this.txtRef = React.createRef()
   }
 
-  // 事件处理程序
-  // 这里直接这样写会找不到this,是undefined
-  // 可以将事件处理程序改成箭头函数
-  onIncrement =  () => {
-    this.setState({
-      count: this.state.count + 1
-    })
+  // 获取文本框的值
+  getTxt = () => {
+    console.log(this.txtRef.current.value)
   }
+
   render() {
     return (
       <div>
-        <h1>计数器：{this.state.count}</h1>
-        <button onClick={this.onIncrement} >+1</button>
+        <input type="text" ref={this.txtRef}></input>
+        <button onClick={this.getTxt}>获取文本框的值</button>
       </div>
     )
   }
