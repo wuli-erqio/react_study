@@ -32,10 +32,26 @@
 4. 将子组件的数据作为参数传递给回调函数
 > 注意: 回调函数中this的指向问题
 ### 3.3 兄弟组件
+<font color=pink>例子：06-兄弟组件.js</font>
 * 将<font color=skyblue>共享状态</font>提升到最近的公共父组件中,由<font color=skyblue>公共父组件</font>管理这个状态</font>
 * 思想: <font color=red>状态提升
 * 公共父组件职责: 1. 提供共享状态 2. 提供操纵共享状态的方法
 * 要通讯的子组件只需要通过<font color=red>props</font>接收状态或操作状态的方式
-## 4.
-## 5.
+
+## 4.Context
+<font color=pink>例子：07-context基本使用.js</font>
+> 思考: App组件要传递数据给Child组件,如何如理
+* 处理方式: 使用props一层层往下传递(繁琐)
+* 更好的方法: 使用Context
+* <font color=red>作用: 跨组件传递数据</font>(比如:主题,语言等)
+#### 使用步骤
+1. 调用React.createContext()创建Provider(提供数据)和Consumer(消费数据)两个组件
+2. 使用Provider组件作为父节点
+3. 设置value属性,表示要传递的数据
+4. 调用Consumer组件接收数据
+#### 总结
+1. 如果两个组件时远方亲戚(比如:嵌套多层)可以使用Context实现组件通讯
+2. Context提供了两个组件: Provider和Consumer
+3. Provider组件: 用来提供数据
+4. Consumer组件: 用来消费数据
 ## 5.
