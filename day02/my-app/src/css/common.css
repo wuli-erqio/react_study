@@ -18,3 +18,14 @@
   margin-top: 20px;
   text-align: center;
 }
+
+.parent {
+  width: 300px;
+  height: 400px;
+  background-color: lightgreen;
+}
+.child {
+  width: 300px;
+  height: 100px;
+  background-color: skyblue;
+}
