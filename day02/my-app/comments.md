@@ -1,4 +1,5 @@
 # 评论列表案例
+<font color=pink>例子：01-comments.js</font>
 ## 实现步骤
 1. 渲染评论列表
 * 在state中初始化评论列表数据

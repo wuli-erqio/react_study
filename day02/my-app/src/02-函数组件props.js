@@ -1,20 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// 接收数据使用this
-class Hello extends React.Component {
-  // 推荐使用
-  constructor(props) {
-    super(props)
-    console.log(props)
-  }
-  render() {
-    return (
+// 接收数据
+const Hello = (props) => {
+  props.fn()
+  // props是一个对象
+
+  // 修改props的值:
+  // props.name = 'tom'
+  return (
     <div>
-      props: {this.props.name}
+      <h1>props:{props.name}</h1>
+      {props.tag}
     </div>
-    )
-  }
+  )
 }
 
 
