@@ -54,4 +54,35 @@
 2. Context提供了两个组件: Provider和Consumer
 3. Provider组件: 用来提供数据
 4. Consumer组件: 用来消费数据
-## 5.
+
+## 5.props深入
+### 5.1 children属性
+<font color=pink>例子：08-children属性.js</font>
+
+* children属性: 表示组件标签的子节点,当组件标签有了节点时, props就会有改属性
+* children属性与普通的props一样,值可以是任意值(文本.React元素.组件.甚至是函数)
+
+### 5.2 props校验
+* 对于组件来说, props是外来的,无法保证组件使用者传入什么格式的数据
+* 如果传入的数据格式不对,可能会导致组件内部报错
+* 关键问题: 组件的使用者不知道明确的错误原因
+* 解决: props校验: 允许在创建组件的时候,指定props的类型,格式
+* 作用: 捕获使用组件时因为props导致的错误,给组件明确的错误提示,增加组件的健壮性
+#### 使用步骤
+<font color=pink>例子：09-props校验基础.js</font>
+
+1. 安装prop-types(yarn add prop-types / npm i prop-types)
+2. 导入prop-types包
+3. 使用<font color=red>组件名propTypes = {}</font> 来给组件的propt添加校验规则
+4. 校验规则通过propTypes对象来指定
+#### 约束规则
+<font color=pink>例子：10-props常见校验.js</font>
+1. 常见类型: array, bool, func, number, object, string
+2. React元素类型: element
+3. 必填项: isRequired
+4. 特定结构的对象: shape({})
+
+### 5.2 props的默认值
+<font color=pink>例子：index.js</font>
+* 场景: 分页组件 -> 每页显示条数
+* 作用: 给props设置默认值,在未传入props时生效
