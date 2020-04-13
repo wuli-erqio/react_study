@@ -120,3 +120,42 @@
 
 * 执行时机： 组件从页面中消失
 1. componentWillUnmount 触发时机：组件卸载(从页面中消失)， 作用： 执行清理工作(比如：清理定时器等)
+
+## 7.render-props和高阶组件
+### 7.1 React组件复用概述
+* 思考：如果两个组件中部分功能相似或者相同，如何处理？
+* 处理方式： <font color=red>复用</font>相似的功能(联想函数封装)
+* 复用什么？ 1. <font color=red>state</font> 2.<font color=red>操作state方法</font>(组件状态逻辑)
+* 两种方式： 1. <font color=red>**render prop模式**</font> 2. <font color=red>高阶组件(HOC)</font>
+* 注意：这两种方式<font color=red>不是新的API</font>,而是利用React自身特点的编码技巧，演化而成的固定模式(写法)
+### 7.2 render prop模式
+#### 思路分析
+* 思路：将要复用是state和操作state的方法封装到一个组件
+* 问题1： 如何拿到该组件中复用的state?
+* 在使用组件时，添加一个值为<font color=red>函数的prop</font>，通过函数<font color=red>参数</font>来获取(需要组件内部实现)
+* 问题2： 如何渲染任意的UI?
+* 使用<font color=red>该函数的返回值</font>作为要渲染的UI内容(需要组件内部实现)
+#### 使用步骤
+<font color=pink>例子：15-render prop模式使用.js</font>
+
+1. 创建Mouse组件，在组件中提供复用<font color=red>状态逻辑</font>代码(1. 状态， 2.操作状态的方法)
+2. 将要<font color=red>复用的状态</font>作为props.render(<font color=red>state</font>)方法的参数，暴露到组件外部
+3. 使用props.render()的<font color=red>返回值</font>作为要渲染的内容
+#### children代替render属性
+<font color=pink>例子：16-children代替render属性.js</font>
+
+* 注意：并不是该模式叫做render props 就必须使用render的prop,实际上可以使用任意名称的prop
+* 把prop是一个函数并且告诉组件要渲染什么内容的技术叫做： render prop模式
+* 推荐： 使用<font color=red>children</font>代替render属性
+#### 代码优化
+<font color=pink>例子：17-代码优化.js</font>
+1. 推荐：给render props模式添加props校验
+2. 应该在组件卸载时解除mousemove事件绑定
+
+### 7.3 高阶组件
+#### 概述
+* 目的：<font color=red>实现状态逻辑复用</font>
+* 采用<font color=red>包装(装饰)模式</font>，比如说：手机壳
+* 手机： 获取保护功能
+* 手机壳： 提供保护功能
+* 高阶组件就相当于手机壳，通过包装组件，增加组件功能
