@@ -33,8 +33,9 @@
 > 注意: 回调函数中this的指向问题
 ### 3.3 兄弟组件
 <font color=pink>例子：06-兄弟组件.js</font>
+
 * 将<font color=skyblue>共享状态</font>提升到最近的公共父组件中,由<font color=skyblue>公共父组件</font>管理这个状态</font>
-* 思想: <font color=red>状态提升
+* 思想: <font color=red>状态提升</font>
 * 公共父组件职责: 1. 提供共享状态 2. 提供操纵共享状态的方法
 * 要通讯的子组件只需要通过<font color=red>props</font>接收状态或操作状态的方式
 
@@ -83,6 +84,39 @@
 4. 特定结构的对象: shape({})
 
 ### 5.2 props的默认值
-<font color=pink>例子：index.js</font>
+<font color=pink>例子：11-props的默认值.js</font>
+
 * 场景: 分页组件 -> 每页显示条数
 * 作用: 给props设置默认值,在未传入props时生效
+## 6.组件的生命周期
+### 6.1 组件的生命周期的概述
+* 意义：组件的生命周期有助于理解组件的运行方式，完成更复杂的组件功能，分析组件错误原因
+* <font color=red>组件生命周期</font>： 组件从创建到挂载到页面中运行，再到组件不用时卸载的过程
+* 生命周期的每个阶段总伴随者一些方法调用，这些方法就是生命周期的<font color=red>钩子函数</font>
+* 钩子函数的作用：为开发人员在不同阶段操作组件提供了时机
+* <font color=red>只有类组件才有生命周期</font>
+### 6.2 生命周期的三个阶段
+1. 创建时(挂载阶段)
+<font color=pink>例子：12-生命周期创建阶段.js</font>
+
+* 执行时机： 组件创建时(页面加载时)
+* 执行顺序
+> constructor()  ---->   render()   ---->   componentDidMount()
+1. constructor: 创建组件时最先触发，作用：1.初始化state  2.为事件处理程序绑定this
+2. render: 每次组件渲染都会触发， 作用：渲染UI(注意：不能调用setState)
+3. componentDidMount:组件挂在(完成DOM渲染)后，1.发送网络请求  2.DOM操作
+
+2. 更新时(更新阶段)
+<font color=pink>例子：13-生命周期更新阶段.js</font>
+
+* 执行顺序
+> render()   ---->   componentDidMount()
+1. render: 每次组件渲染都会触发， 作用：渲染UI(注意：不能调用setState)
+2. componentDidUpdate: 组件更新(完成DOM渲染)后， 作用： 1.发送网络请求  2.DOM操作 注意：如果要setState()必须放在一个if条件中
+* 执行时机： 1. setState() 2. forceUpdate() 3. 组件接收到新的props
+* 说明： 以上三种任意一种变化，组件就会重新渲染
+3. 卸载时(卸载阶段)
+<font color=pink>例子：14-生命周期卸载阶段.js</font>
+
+* 执行时机： 组件从页面中消失
+1. componentWillUnmount 触发时机：组件卸载(从页面中消失)， 作用： 执行清理工作(比如：清理定时器等)
