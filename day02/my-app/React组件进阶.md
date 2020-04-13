@@ -159,3 +159,27 @@
 * 手机： 获取保护功能
 * 手机壳： 提供保护功能
 * 高阶组件就相当于手机壳，通过包装组件，增加组件功能
+#### 思路分析
+* <font color=red>高阶组件(HOC，Height-OrderComponent)是一个函数</font>，接收要包装的组件，返回增强后的组件
+* 高阶组件内部创建一个类组件，在这个类组件中提供复用的状态逻辑代码，通过prop将复用的状态传递给被包装组件WrappedComponent
+#### 使用步骤
+<font color=pink>例子：18-高阶组件使用步骤.js</font>
+
+1. 创建一个函数，名称约定<font color=red>以with开头</font>
+2. 指定函数参数，参数名应该以大写字母开头(作为要渲染的组件)
+3. 在函数内部创建一个类组件，<font color=red>提供复用的状态逻辑代码</font>，并返回
+4. 在该组件中，渲染参数组件，同时将状态通过prop传递给参数组件
+5. 调用该高阶组件，传入要增强的组件，通过返回值拿到的增强后的组件，并将其渲染你到页面中
+#### 设置displayName
+<font color=pink>例子：19-高阶组件设置displayName.js</font>
+
+* 使用高阶组件存在问题：得到两个组件名称相同
+* 原因： 默认情况下，React使用组件名称作为displayName
+* 解决方式: 为高阶组件设置displayName便于调试区分不同的组件
+* displayName作用： 用于设置调试信息(React Developer Tool信息)
+#### 传递props
+* 问题： props丢失
+* 原因： 高阶组件没有往下传递props
+* 解决方式： 渲染WrappedComponent时，将state和this.props一起传递给组件
+* 传递方式： 
+`<WrappedComponent {...this.state} {this.props}/>`

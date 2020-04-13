@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom'
 
 import Img from './images/11.jpg'
 
-// 创建高阶组件
 function withMouse(WrappedComponent) {
-
   class Mouse extends React.Component {
     state = {
       x: 0,
@@ -24,7 +22,7 @@ function withMouse(WrappedComponent) {
       window.removeEventListener('mousemove', this.handleClick)
     }
     render() {
-      return <WrappedComponent {...this.state} {...this.props}/>
+      return <WrappedComponent {...this.state} />
     }
   }
   // 设置displayName
@@ -36,14 +34,21 @@ function getDisplayName(WrappedComponent) {
 }
 
 const Position = props => (<p>鼠标当前位置：(x: {props.x}, y: {props.y})</p>)
-
+const Cat = props => (<img src={Img} alt="猫" style={{
+  width: 128,
+  position: "absolute",
+  top: props.y,
+  left: props.x
+}}></img>)
 const MousePosition = withMouse(Position)
+const MouseCat = withMouse(Cat)
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <MousePosition a="1"/>
+        <MousePosition/>
+        <MouseCat/>
       </div>
     )
   }
