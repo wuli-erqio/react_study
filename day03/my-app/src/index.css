@@ -1,0 +1,22 @@
+.app {
+  width: 700px;
+  padding: 20px;
+}
+.app-box{
+  display: flex;
+  justify-content: space-between;
+}
+.parent {
+  width: 48%;
+  background: #87CEEB;
+  padding: 20px 0;
+}
+.parent-box {
+  display: flex;
+  justify-content: space-between;
+}
+.child {
+  width: 48%;
+  background-color: #9ACD32;
+  height: 200px;
+}
