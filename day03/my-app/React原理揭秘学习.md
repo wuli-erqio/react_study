@@ -18,6 +18,7 @@
 * 语法： setState(updater[,callback])
 ## 2.JSX语法转换
 <font color=pink>例子：04-JSX语法转换.js</font>
+
 * JSX仅仅是createElement()方法的语法糖(简化语法)
 * JSX语法或被@babel/preset-react插件编译为createElement()方式
 * React元素： 是一个对象，用来描述你希望在屏幕上看到的内容
@@ -63,6 +64,7 @@ class Hello extends Component {
 * 对于值类型来说：比较两个值是否相同(直接赋值即可，没有坑)
 * 对于引用类型：只比较对象的引用(地址)是否相同
 * 注意：state或props中属性值为引用类型，应该创建新数据，不应该修改原数据
+<font color=pink>例子：09-随机数案例避免不必要纯组件(引用类型).js</font>
 ```
 // 正确创建引用类型数据
 // 不要使用数组的push/unshift等直接修改当前数组的方法
@@ -70,3 +72,41 @@ class Hello extends Component {
 ```
 
 ## 5.虚拟DOM和Diff算法
+* React更新视图的思想：只要state变化就重新渲染视图
+* 特点： 思路非常清晰
+* 问题：组件中只有一个DOM元素需要更新时，也得把整个组件内容重新渲染到页面中？(不是)
+* 理想状态：<font color=pink>部分更新</font>，只更新变化的地方
+* 问题：React是如何做到部分更新的？ <font color=pink>虚拟DOM配合Diff算法</font>
+> 虚拟DOM: 本质上就是一个JS对象，用来描述你希望在屏幕上看到的内容(UI)
+```
+// 虚拟DOM                                     // HTML结构
+const elelment = {                             <h1 class="greeting">
+  type: 'h1',                                    Hello JSX!
+  props: {                        ====>>        </h1>
+    className: 'greeting',
+    children: 'Hello JSX!'
+  }
+}
+```
+#### 执行过程
+1. 初次渲染时，React会根据初始state(Model),创建一个虚拟DOM对象(树)
+2. 根据虚拟DOM生成真正的DOM，渲染到页面
+3. 当数据变化后(setState()), 重新根据新的数据，创建新的虚拟DOM对象(树)
+4. 与上次得到的虚拟DOM对象，使用Diff算法对比(找不同)，得到需要更新的内容。
+5. 最终，React只将变化的内容更新(patch)到DOM中，重新渲染到页面。
+#### 代码演示
+* 组件render()调用后，根据状态和JSX结构生成虚拟DOM对象
+* 实例中，只更新p元素的文本节点内容
+```
+{
+  type: 'div',
+  props: {
+    children: [
+      {type: "p", props: {children: '随机数'}}
+      {type: "button", props: {children: 0}}
+    ]
+  }
+}
+// ...省略其他结构
+      {type: "button", props: {children: 2}}
+```

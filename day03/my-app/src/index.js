@@ -4,36 +4,27 @@ import './index.css'
 
 class App extends React.PureComponent {
   state = {
-    obj: {
       number: 0
-    }
-
   }
   handleClick = () => {
-    // 正确做法
-    const newObj = {...this.state.obj, number: Math.floor(Math.random() * 3)}
     this.setState(() => {
       return {
-        obj: newObj
+        number: Math.floor(Math.random() * 3)
       }
     })
-    // 错误演示
-    // const newObj = this.state.obj
-    // newObj.number = Math.floor(Math.random() * 3)
-    // this.setState(() => {
-    //   return {
-    //     obj: newObj
-    //   }
-    // })
   }
+  // render 方法的调用并不意味这浏览器是重新渲染
+  // render 方法调用仅仅说明要进行diff
   render () {
-    // console.log('render')
-    return (
+    const el = (
       <div>
-        <h1>随机数： {this.state.obj.number}</h1>
+        <h1>随机数：</h1>
+        <p>{this.state.number}</p>
         <button onClick={this.handleClick}>重新生成</button>
       </div>
     )
+    console.log(el)
+    return el
   }
 }
 ReactDOM.render(<App />, document.getElementById('root'))
