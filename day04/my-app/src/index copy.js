@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // 1. 下载安装react-router-dom
 // 2.导入路由依赖组件
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { HashRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 // 组件页面一的内容
 const First = () => <p> 页面一的内容 </p>
