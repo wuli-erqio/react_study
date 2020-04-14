@@ -110,3 +110,11 @@ const elelment = {                             <h1 class="greeting">
 // ...省略其他结构
       {type: "button", props: {children: 2}}
 ```
+## 总结
+1. 工作角度： 应用第一，原理第二
+2. 原理有助于更好的理解React的自身运行机制
+3. setstate()异步更新数据
+4. 父组件更新导致子组件更新，纯组件提升性能
+5. 思路清晰简单为前提，虚拟DOM和Diff保证效率
+6. 虚拟DOM->state + JSX
+7. 虚拟DOM的真正价值从来都不是性能
