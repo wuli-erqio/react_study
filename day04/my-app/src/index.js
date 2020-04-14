@@ -2,42 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-class Login extends React.Component {
-  handleLogin = () => {
-    // 使用编程式导航实现路由跳转
-    this.props.history.push('/home')
-  }
-  render() {
-    return (
-      <div>
-        <p>登录页面: </p>
-        <button onClick={this.handleLogin}>登录</button>
-      </div>
-    )
-  }
-}
-
-const Home = (props) => {
-  const handleBack = () =>  {
-    // 返回上一页
-    props.history.go(-1)
-  }
-  return (
-    <div>
-      <h2>我是后台首页</h2>
-      <button onClick={handleBack}>返回登陆页面</button>
-    </div>
-  )
-}
+const Home = () => <p> 默认路由,刚进入页面就能看见 </p>
+const Login = () => <p> 我是Login组件的内容 </p>
 
 const App = () => (
   <Router>
     <div>
-      <h2>编程式导航:</h2>
-      <Link to="/login">去登陆页面</Link>
+      <h1>默认路由</h1>
+      <ul>
+        <li><Link to="/">首页</Link></li>
+        <li><Link to="/login">登录页面</Link></li>
+      </ul>
+      
+      {/* 添加exact变成精确匹配 */}
+      <Route exact path="/" component={Home}></Route>
       <Route path="/login" component={Login}></Route>
-      <Route path="/home" component={Home}></Route>
     </div>
   </Router>
 )
+
 ReactDOM.render(<App />, document.getElementById('root'))
