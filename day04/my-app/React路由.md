@@ -56,6 +56,12 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 <Route path="/first" component={First}></Route>
 ```
 ## 3.路由的执行过程
+<font color=pink>例子：02-路由的执行过程.js</font>
+
+1. 点击Link组件(a标签), 修改了浏览器地址栏中的url
+2. React路由监听到地址栏中url的变化
+3. React路由内部遍历的所有Route组件,使用路由规则(path) 与pathname进行匹配
+4. 当路由规则(path) 能够匹配地址栏中的pathname时,就展示Route组件的内容
 ## 4.编程式导航
 ## 5.默认路由
 ## 6.匹配路由
