@@ -21,7 +21,9 @@
 </Router>
 ```
 4. 使用**Link组件**作为导航菜单(路由入口)
-`<Link to="/first">页面一</Link>`
+```
+<Link to="/first">页面一</Link>
+```
 5. 使用**Router组件**配置路由规则和要展示的组件(路由出口)
 ```
 const First = () => <p> 页面一的内容 </p>
@@ -32,11 +34,14 @@ const First = () => <p> 页面一的内容 </p>
   </div>
 </Router>
 ```
+
 ### 2.2 常用组件说明
 * Router组件: 包裹整个应用,一个React应用只需要<font color=red>BrowserRouter</font>使用一次</font>
 * 两种常用Router: HashRouter和<font color=red>BrowserRouter</font>BrowserRouter</font>
 * HashRouter: 使用URL的哈希值实现(localhost:3000/#/first)
-`import { HashRouter as Router, Route, Link } from 'react-router-dom'`
+```
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
+```
 * (推荐)<font color=red>BrowserRouter</font>: 使用H5的history API实现(localhost:3000/first)
 * Link作用: 用于指定导航链接(a标签)
 ```
