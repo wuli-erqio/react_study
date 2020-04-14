@@ -63,5 +63,21 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 3. React路由内部遍历的所有Route组件,使用路由规则(path) 与pathname进行匹配
 4. 当路由规则(path) 能够匹配地址栏中的pathname时,就展示Route组件的内容
 ## 4.编程式导航
+* 场景: 点击登录按钮,登录成功后,通过代码跳转到后台首页,如何实现?
+* 编程式导航: 通过JS代码来实现页面的跳转
+* history是React路由提供的,用于获取浏览器历史记录的相关信息
+* push(path): 跳转到某个页面,参数path表示要跳转的路径
+* go(n): 前进或者后退到某个页面, 参数n表示前进或者后退页面数量(比如: -1表示后退到上一页)
+```
+class Login extends Compontent {
+  handleLogin = () => {
+    // ..
+    this.props.history.push('/home')
+  }
+  render() {
+    // ... 省略代码
+  }
+}
+```
 ## 5.默认路由
 ## 6.匹配路由
