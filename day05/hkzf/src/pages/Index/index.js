@@ -13,22 +13,22 @@ const navs = [
     id: 1,
     img: Nav1,
     title: '整租',
-    path: 'home/list'
+    path: 'home/houselist'
   },{
     id: 2,
     img: Nav2,
     title: '合租',
-    path: 'home/q'
+    path: 'home/houselist'
   },{
     id: 3,
     img: Nav3,
     title: '地图找房',
-    path: 'home/w'
+    path: 'home/houselist'
   },{
     id: 4,
     img: Nav4,
     title: '出租',
-    path: 'home/e'
+    path: 'home/houselist'
   }
 ]
 export default class Index extends React.Component {
@@ -38,7 +38,6 @@ export default class Index extends React.Component {
   }
   async getSwipers() {
     const res = await axios.get('http://localhost:8080/home/swiper')
-    console.log(res)
     this.setState(() => {
       return {
         swipers: res.data.body,
@@ -62,7 +61,7 @@ export default class Index extends React.Component {
         <img
           src={`http://localhost:8080${item.imgSrc}`}
           alt=""
-          style={{ width: '100%', verticalAlign: 'top' }}
+          style={{ width: '100%', height: 212, verticalAlign: 'top' }}
         />
       </a>
     ))
@@ -79,9 +78,14 @@ export default class Index extends React.Component {
     return (
       <div className="index">
         {/* 轮播图 */}
-        <Carousel autoplay infinite>
-          { this.state.isSwipersLoaded ? this.renderSwipers() : '' }
-        </Carousel>
+        <div className="swiper">
+          {
+            this.state.isSwipersLoaded ?
+            (<Carousel autoplay infinite autoplayInterval={5000}>
+              {this.renderSwipers()} </Carousel>): ('')
+          }
+        </div>
+        
         {/* 首页导航 */}
         <Flex className="nav">
           {this.renderNavs()}

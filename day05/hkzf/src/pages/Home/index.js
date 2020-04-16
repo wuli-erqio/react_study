@@ -10,7 +10,17 @@ import HouseList from '../HouseList'
 import { TabBar } from 'antd-mobile';
 // 导入自己的样式
 import './index.css'
+/*
+问题： 点击导航菜单，tabbar并没有高亮
+原因： 原来我们实现该组件的时候，只考虑了点击以及第一次加载组件的情况，但是，我们为您没有考虑
+不重新加载组件的时候的路由切换，因为这种情况下，我们的代码没有覆盖到
 
+解决： 
+  思路：路由切换时，也执行菜单高亮是逻辑代码
+  1.添加componentDidUpdate钩子函数
+  2.在钩子函数中判断路由地址是否切换
+  3.在路由地址切换时，让菜单高亮
+*/
 const tabItems = [
   {
     title: '首页',
@@ -34,6 +44,15 @@ export default class Home extends React.Component {
   state = {
     // 默认选中的tabbar
     selectedTab: this.props.location.pathname,
+  }
+
+  // 再此判断组件未重新加载，路由切换时更新state
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.setState({
+        selectedTab: this.props.location.pathname
+      })
+    }
   }
 
   // 渲染TabBar.Item 
