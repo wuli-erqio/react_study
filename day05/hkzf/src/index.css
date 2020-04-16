@@ -8,6 +8,6 @@ html, body {
   box-sizing: border-box;
   touch-action: pan-y;
 }
-h2 {
+h2, h3 {
   margin: 0;
 }

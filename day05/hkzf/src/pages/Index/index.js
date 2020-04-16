@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, Flex } from 'antd-mobile'
+import { Carousel, Flex, Grid } from 'antd-mobile'
 import axios from 'axios'
 // 导入图片
 import Nav1 from '../../assets/images/nav-1.png'
@@ -31,11 +31,14 @@ const navs = [
     path: 'home/houselist'
   }
 ]
+
 export default class Index extends React.Component {
   state = {
     swipers: [],
-    isSwipersLoaded: false
+    isSwipersLoaded: false,
+    groups: []
   }
+  // 获取轮播图
   async getSwipers() {
     const res = await axios.get('http://localhost:8080/home/swiper')
     this.setState(() => {
@@ -45,9 +48,23 @@ export default class Index extends React.Component {
       }
     })
   }
+  // 获取合租小组
+  async getGroups() {
+    const res = await axios.get(`http://localhost:8080/home/groups`, {
+      params: {
+        area: 'AREA%7C88cff55c-aaa4-e2e0'
+      }
+    })
+    this.setState(() => {
+      return {
+        groups: res.data.body,
+      }
+    })
+  }
   // 调用方法
   componentDidMount() {
     this.getSwipers()
+    this.getGroups()
   }
 
   // 遍历swipers
@@ -90,7 +107,24 @@ export default class Index extends React.Component {
         <Flex className="nav">
           {this.renderNavs()}
         </Flex>
-      </div>
-    )
-  }
+        {/* 租房小组 */}
+        <div className="groups">
+          <div className="groups-title">
+            <h3>租房小组</h3><span>更多</span>
+          </div>
+          <Grid square={false} hasLine={false} columnNum={2} data={this.state.groups} renderItem={(item) => (
+            <Flex className="group-item" justify="around" key={item.id}>
+              <div className="desc">
+                <p className="title">{item.title}</p>
+                <span className="info">{item.desc}</span>
+              </div>
+              <img 
+                src={`http://localhost:8080${item.imgSrc}`}
+                alt=""
+              />
+            </Flex>
+          )} />
+          </div>
+        </div>
+      )}
 }
