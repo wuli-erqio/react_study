@@ -16,3 +16,10 @@ h3 {
   font-size: 15px;
   font-weight: 600;
 }
+html, body, #root, .App {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+}

@@ -31,7 +31,10 @@ const navs = [
     path: 'home/houselist'
   }
 ]
-
+// 获取地理位置信息
+navigator.geolocation.getCurrentPosition(position => {
+  console.log(position)
+})
 const Item = List.Item;
 const Brief = Item.Brief;
 export default class Index extends React.Component {
@@ -39,7 +42,8 @@ export default class Index extends React.Component {
     swipers: [],
     isSwipersLoaded: false,
     groups: [],
-    news: []
+    news: [],
+    curCtiyName: '苏州'
   }
   // 获取轮播图
   async getSwipers() {
@@ -82,6 +86,15 @@ export default class Index extends React.Component {
     this.getSwipers()
     this.getGroups()
     this.getnews()
+    // 通过IP定位
+    const curCity = new window.BMap.LocalCity()
+    curCity.get(async res => {
+      const result = await axios.get(`http://localhost:8080/area/info?name=${res.name}`)
+      console.log(result)
+      this.setState({
+        curCtiyName: result.data.body.label
+      })
+    })
   }
 
   // 遍历swipers
@@ -127,7 +140,7 @@ export default class Index extends React.Component {
             {/* 左侧白色区域 */}
             <Flex className="search">
               <div className="location" onClick={() => this.props.history.push('/citylist')}>
-                <span className="name">上海</span>
+                <span className="name">{this.state.curCtiyName}</span>
                 <i className="iconfont icon-arrow"></i>
               </div>
               <div className="form"  onClick={() => this.props.history.push('/search')}>
