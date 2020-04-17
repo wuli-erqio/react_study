@@ -1,5 +1,44 @@
 .swiper {
   height: 212px;
+  position: relative;
+}
+.swiper .am-flexbox {
+  z-index: 1;
+}
+/* 顶部导航 */
+.search-box {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  padding: 0 10px;
+}
+.search {
+  flex: 1;
+  height: 34px;
+  margin: 0 10px;
+  padding: 5px 5px 5px 8px;
+  background-color: #fff;
+}
+.location .icon-arrow {
+  margin-left: 2px;
+  font-size: 12px;
+  vertical-align: middle;
+  color: #7f7f80;
+}
+.form {
+  border-left: 1px solid #e5e5e5;
+  margin-left: 12px;
+  line-height: 16px;
+}
+.form .icon-seach {
+  vertical-align: middle;
+  margin: 0 2px 0 12px;
+  color: #7f7f80;
+  font-size: 15px;
+}
+.icon-map {
+  font-size: 25px;
+  color: #fff;
 }
 /* 首页导航  */
 .nav {
@@ -52,6 +91,7 @@
     background-color: #fff;
   }
   /* 覆盖默认背景色 */
+
   .am-grid .am-flexbox {
     background-color: rgba(0, 0, 0, 0) !important;
   }
@@ -87,4 +127,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.news .am-list-item .am-list-line .am-list-brief {
+  font-size: 12px;
 }

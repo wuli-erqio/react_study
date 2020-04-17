@@ -122,13 +122,28 @@ export default class Index extends React.Component {
       <div className="index">
         {/* 轮播图 */}
         <div className="swiper">
+          {/* 搜索框 */}
+          <Flex className="search-box">
+            {/* 左侧白色区域 */}
+            <Flex className="search">
+              <div className="location" onClick={() => this.props.history.push('/citylist')}>
+                <span className="name">上海</span>
+                <i className="iconfont icon-arrow"></i>
+              </div>
+              <div className="form"  onClick={() => this.props.history.push('/search')}>
+                <i className="iconfont icon-seach"></i>
+                <span className="text">请输入小区地址</span>
+              </div>
+            </Flex>
+            {/* 右侧地图图标 */}
+            <i className="iconfont icon-map" onClick={() => this.props.history.push('/map')}></i>
+          </Flex>
           {
             this.state.isSwipersLoaded ?
             (<Carousel autoplay infinite autoplayInterval={5000}>
               {this.renderSwipers()} </Carousel>): ('')
           }
         </div>
-        
         {/* 首页导航 */}
         <Flex className="nav">
           {this.renderNavs()}
@@ -152,7 +167,7 @@ export default class Index extends React.Component {
           )} />
         </div>
         {/* 最新资讯 */}
-        <div className="news" style={{height: '200px'}}>
+        <div className="news">
           <h3>最新资讯</h3>
           <List>{this.renderNews()}</List>
         </div>
