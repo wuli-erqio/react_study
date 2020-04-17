@@ -7,6 +7,8 @@ import Nav2 from '../../assets/images/nav-2.png'
 import Nav3 from '../../assets/images/nav-3.png'
 import Nav4 from '../../assets/images/nav-4.png'
 
+import { getCurrentCity } from '../../utils/index'
+
 import './index.css'
 const navs = [
   {
@@ -82,18 +84,23 @@ export default class Index extends React.Component {
     })
   } 
   // 调用方法
-  componentDidMount() {
+  async componentDidMount() {
     this.getSwipers()
     this.getGroups()
     this.getnews()
     // 通过IP定位
-    const curCity = new window.BMap.LocalCity()
-    curCity.get(async res => {
-      const result = await axios.get(`http://localhost:8080/area/info?name=${res.name}`)
-      console.log(result)
-      this.setState({
-        curCtiyName: result.data.body.label
-      })
+    // const curCity = new window.BMap.LocalCity()
+    // curCity.get(async res => {
+    //   const result = await axios.get(`http://localhost:8080/area/info?name=${res.name}`)
+    //   console.log(result)
+    //   this.setState({
+    //     curCtiyName: result.data.body.label
+    //   })
+    // })
+    // 获取当前定位城市
+    const curCtiy = await getCurrentCity()
+    this.setState({
+      curCtiyName: curCtiy.label
     })
   }
 
