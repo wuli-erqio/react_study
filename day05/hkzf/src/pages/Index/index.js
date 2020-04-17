@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, Flex, Grid } from 'antd-mobile'
+import { Carousel, Flex, Grid, List } from 'antd-mobile'
 import axios from 'axios'
 // 导入图片
 import Nav1 from '../../assets/images/nav-1.png'
@@ -32,11 +32,14 @@ const navs = [
   }
 ]
 
+const Item = List.Item;
+const Brief = Item.Brief;
 export default class Index extends React.Component {
   state = {
     swipers: [],
     isSwipersLoaded: false,
-    groups: []
+    groups: [],
+    news: []
   }
   // 获取轮播图
   async getSwipers() {
@@ -61,10 +64,24 @@ export default class Index extends React.Component {
       }
     })
   }
+  // 最新资讯
+  async getnews() {
+    const res = await axios.get(`http://localhost:8080/home/news`, {
+      params: {
+        area: 'AREA%7C88cff55c-aaa4-e2e0'
+      }
+    })
+    this.setState(() => {
+      return {
+        news: res.data.body,
+      }
+    })
+  } 
   // 调用方法
   componentDidMount() {
     this.getSwipers()
     this.getGroups()
+    this.getnews()
   }
 
   // 遍历swipers
@@ -90,7 +107,16 @@ export default class Index extends React.Component {
       <h2>{item.title}</h2>
     </Flex.Item>)
   }
-
+  // 遍历最新资讯
+  renderNews() {
+    return  this.state.news.map(item => <Item key={item.id} align="top" thumb={`http://localhost:8080${item.imgSrc}`} multipleLine>
+              <div>{item.title}</div>
+              <div className="info">
+                <Brief>{item.from}</Brief><Brief>{item.date}</Brief>
+              </div>
+            </Item>
+          )
+  }
   render() {
     return (
       <div className="index">
@@ -124,7 +150,12 @@ export default class Index extends React.Component {
               />
             </Flex>
           )} />
-          </div>
         </div>
+        {/* 最新资讯 */}
+        <div className="news" style={{height: '200px'}}>
+          <h3>最新资讯</h3>
+          <List>{this.renderNews()}</List>
+        </div>
+      </div>
       )}
 }

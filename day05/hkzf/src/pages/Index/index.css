@@ -1,6 +1,7 @@
 .swiper {
   height: 212px;
 }
+/* 首页导航  */
 .nav {
   padding: 10px 0;
 }
@@ -15,18 +16,15 @@
   .nav .am-flexbox-item {
     text-align: center;
   }
+  /* 租房小组 */
   .groups {
-    padding: 0 10px;
+    padding: 0 10px 5px 10px;
     background-color: #eee;
   }
   .groups-title {
     display: flex;
     padding: 10px 5px;
     justify-content: space-between;
-  }
-  .groups-title h3 {
-    font-size: 15px;
-    font-weight: 600;
   }
   .groups-title span {
     font-weight: normal;
@@ -60,3 +58,33 @@
   .am-grid .am-flexbox .am-flexbox-item .am-grid-item-content{
     padding: 10px 0 15px 0!important;
   }
+
+  /* 最新资讯 */
+  .news {
+    padding: 0 10px;
+  }
+  .news h3 {
+    padding: 10px 0 10px 5px;
+  }
+  .am-list-item .am-list-thumb:first-child {
+    margin-right: 15px;
+    width: 100px;
+}
+.news .info {
+  display: flex;
+  justify-content: space-between;
+}
+.news .am-list-item  {
+  padding-left: 0;
+}
+.news .am-list-item img {
+  width: 100%;
+  height: 100%;
+  margin: 10px 0 10px 0;
+}
+.am-list-item .am-list-line .am-list-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
