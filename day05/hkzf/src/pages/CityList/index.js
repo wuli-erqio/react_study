@@ -3,6 +3,7 @@ import { NavBar, Icon } from 'antd-mobile';
 import './index.css'
 import axios from 'axios'
 import { getCurrentCity } from '../../utils/index'
+import { List } from 'react-virtualized'
 
 // 数据格式化方法
 const formatCityData = (list) => {
@@ -25,6 +26,23 @@ const formatCityData = (list) => {
   return {
     cityList, cityIndex
   }
+}
+// 长列表
+const list = Array(100).fill('OOOO')
+// 渲染每一行的内容函数rowRenderer
+function rowRenderer({
+  key,          // 唯一key
+  index,        // 列表每一行的索引号
+  isScrolling,  // 当前项是否正在滚动中
+  isVisible,    // 这一行在类型中是可见的
+  style         // 样式对象,一定应用到每一行, 没有的话,滚动可能会有卡白屏的情况 作用: 指定每一行的位置
+}){
+  // 最终返回渲染到页面中的内容
+  return (
+    <div key={key} style={style}>
+      {list[index]}
+    </div>
+  )
 }
 export default class CityList extends React.Component {
   componentDidMount() {
@@ -59,6 +77,15 @@ export default class CityList extends React.Component {
         <NavBar mode="light" icon={<i className="iconfont icon-back" />}
           onLeftClick={() => this.props.history.go(-1)}
         >城市选择</NavBar>
+
+        {/* 城市列表 */}
+        <List
+          width={300}
+          height={300}
+          rowCount={list.length}
+          rowHeight={20}
+          rowRenderer={rowRenderer}
+        />
       </div>
     )
   }
