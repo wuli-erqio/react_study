@@ -8,7 +8,7 @@ html, body {
   box-sizing: border-box;
   touch-action: pan-y;
 }
-h2, h3 {
+h2, h3, p, ul {
   margin: 0;
 }
 
@@ -22,4 +22,8 @@ html, body, #root, .App {
 body {
   margin: 0;
   padding: 0;
+}
+
+ul {
+  list-style: none;
 }

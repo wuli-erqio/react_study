@@ -58,3 +58,45 @@
 3. 打开文档,点击List组件,进入List的文档中
 4. 翻到文档底部, 将实例代码拷贝到项目中
 5. 分析实例代码
+
+### 4.6 渲染城市列表
+#### 1. 让List沾满整个屏幕
+1. 打开AutoSizer高阶组件的文档
+2. 导入AutoSizer组件
+3. 通过render-props模式, 获取到AutoSizer组件暴露的width和height属性
+4. 设置list组件的width和height属性
+5. 设置城市选择页面的根元素高度100%, 让list组件占满整个页面
+6. 调整样式,让页面不要出现全局滚动条,避免顶部导航栏滚动
+#### 2. 使用List组件渲染列表
+1. 将获取到的cityList和CityIndex添加为组件的动态数据
+2. 修改list组件的rowCount为cityIndex数组的长度
+3. 将rowRenderer函数,添加到组件中, 以便在函数中获取到状态数据cityList和cityIndex
+4. 修改list组件的rowRenderer为组件中的rowRenderer方法
+5. 修改rowRenderer方法中渲染的每行结构和样式
+6. 修改list组件的rowHeight为函数, 动态的计算每一行的高度(因为每一行的高度都不相同)
+### 4.7 城市索引列表
+#### 1. 渲染城市索引列表
+1. 封装renderCityIndex方法, 用来渲染城市索引列表
+2. 在方法中, 获取索引数组cityIndex, 遍历cityIndex, 渲染索引列表
+3. 将索引列表改为热
+4. 在state 中添加状态activeIndex 来指定当前高亮的索引
+5. 在遍历cityIndex时, 添加当前字母索引是否高亮的判断条件
+#### 2. 滚动城市列表让对应索引高亮
+1. 给list组件添加onRowsRendered配置项, 用于获取当前列表渲染的信息
+2. 通过参数startIndex获取到, 起始行索引(也就是城市列表可视区最顶部一行的索引)
+3. 判断statrindex和activeIndex是否相同(判断的目的是为了提升性能,避免不必要的state更新)
+4. 当startIndex和activeIndex不同时,更新状态,为startIndex的值
+#### 3. 点击索引指定该索引城市
+1. 给索引列表项绑定点击事件
+2. 在点击事件中,通过index获取到当前项索引号
+3. 调用List组件的scrollToRow方法,让List组件滚动到指定行
+* 在constructor中, 调用React.createRef() 创建ref对象
+* 将创建好的ref对象,添加到list组件的ref上
+* 通过ref  的curren属性,获取组件实例, 在调用组件的scrollToRow方法
+4. 设置list组件的scrollToAlignment方法,让list组件滚动到指定行
+5. 对于点击索引无法正确定位的问题,调用List组件measureAllRows方法,提前计算高度来解决
+### 4.8 切换城市
+1. 给城市列表顶绑定点击事件
+2. 判断当前城市是否有房源信息(只有北上广深有数据)
+3. 如果有房源数据, 则保存当前城市数据到本地缓存中,并返回上一页
+4. 如果没有信息,提示无房源
