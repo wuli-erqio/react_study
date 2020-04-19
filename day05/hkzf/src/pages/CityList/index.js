@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavBar, Icon } from 'antd-mobile';
+import { NavBar, Icon, Toast } from 'antd-mobile';
 import './index.css'
 import axios from 'axios'
 import { getCurrentCity } from '../../utils/index'
@@ -9,6 +9,8 @@ import { List, AutoSizer } from 'react-virtualized'
 // 索引标题高度
 const TITLE_HEIGHT = 36
 const NAME_HEIGHT = 50
+// 有房源的城市
+const HOUSE_CITY = ['北京', '上海', '深圳', '广东']
 // 数据格式化方法
 const formatCityData = (list) => {
   const cityList = {}
@@ -95,6 +97,17 @@ export default class CityList extends React.Component {
 
   }
 
+  changeCity({label, value}) {
+    console.log(label, value)
+    if(HOUSE_CITY.indexOf(label) > -1) {
+      // 有房源
+      localStorage.setItem('hkzf_city', JSON.stringify({label, value}))
+      this.props.history.go(-1)
+    }else {
+      // 无房源
+      Toast.info('该城市暂无房源数据', 2, null, false)
+    }
+  }
   // 渲染每一行的内容函数rowRenderer
   rowRenderer = ({
     key,          // 唯一key
@@ -110,8 +123,9 @@ export default class CityList extends React.Component {
       <div key={key} style={style} className="city">
         <div className="title">{formatCityIndex(letter)}</div>
         {/* 获取对应索引下的城市列表 */}
+        {/* 给城市列表顶绑定点击事件 */}
         { 
-        cityList[letter].map(item => <div key={item.value} className="name">{item.label}</div>)
+        cityList[letter].map(item => <div key={item.value} className="name" onClick={() => this.changeCity(item)}>{item.label}</div>)
         }
       </div>
     )
