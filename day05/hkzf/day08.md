@@ -18,5 +18,36 @@
 1. 安装: npm i prop-types
 2. 导入PropTypes
 3. 给NavHeader组件的children和onLeftClick属性添加props校验
+### 1.3 组件间样式覆盖问题
+#### 1. 概述
+* 问题: CityList组件的样式,会影响Map组件的样式
+* 原因: 在配置路由时,CityList和Map组件都被导入到项目中,那么组件的样式也就被导入到项目中了,从而造成组件之间样式互相覆盖的问题
+* 结论: 默认,只要导入了组件,不管组件有没有显示在页面中,组件的样式就会生效
+* 如何解决
+  * 手动处理(起不同的类名)
+  * CSS IN JS
+#### 2. CSS IN JS
+* CSS IN JS: 是使用JavaScript编写CSS的同城,用来解决CSS样式冲突,覆盖等问题
+* CSS IN JS的具体实现有50多种,比如CSS Modules,style-compontents等
+* 推荐使用: CSS Modules(React脚手架已集成,可以直接使用)
+#### 3. CSS Modules的说明
+* CSS Modules通过对css类名重命名,保证每个类名的唯一性,从而避免样式冲突的问题
+* 换句话说: 所有的类名都具有'局部作用域',只在当前组件内部生效
+* 实现方式: webpack 的 css loader
+* 命名采用: BEM(Block块, Element元素, Modifier三部分组成)命名规范, 比如: list_item_active
+* 在React脚手架中演化成: 文件名,类名,hash(随机)三部分,只需要指定类名即可
+#### 4. CSS Modules在项目中的使用
+1. 创建名为[name].modile.css的样式文件(React脚手架中的约定,与普通css做区分)
+2. 组件中导入该样式文件
+3. 通过styles对象访问对象中的样式名设置样式
+#### 5. CSS Modules修改NavHeader的样式
+1. 在NavHeader目录中创建名为index.module.css的样式文件
+2. 在样式文件中修改当前组件的样式(使用单个类名设置样式,不适用嵌套样式)
+3. 对于组件库中已经有的全局样式(比如: am-navbar-title), 需要使用:glibal()来指定
+```
+:global(.am-navbar-title) { color: #333; }
+.root :global(.am-navbar-title) { color: #333; }
+
+```
 ## 2. 地图找房模块
 ## 3. 地图找房模块

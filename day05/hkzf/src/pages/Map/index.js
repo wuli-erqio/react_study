@@ -3,7 +3,8 @@ import React from 'react'
 // 导入封装好的NavHeader组件
 import NavHeader from '../../components/NavHeader/index'
 
-import './index.css'
+// 导入样式
+import styles from './imdex.module.css'
 
 export default class Map extends React.Component {
   componentDidMount() {
@@ -17,9 +18,9 @@ export default class Map extends React.Component {
   }
   render() {
     return (
-      <div className="map">
+      <div className={styles.map}>
         <NavHeader>地图找房</NavHeader>
-        <div id="container">
+        <div id="container" className={styles.container}>
         </div>
       </div>
     )

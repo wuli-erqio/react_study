@@ -7,7 +7,8 @@ import { List, AutoSizer } from 'react-virtualized'
 // 导入封装好的NavHeader组件
 import NavHeader from '../../components/NavHeader/index'
 import './index.css'
-
+// 导入cssModule样式
+import styles from'./imdex.module.css'
 // 索引标题高度
 const TITLE_HEIGHT = 36
 const NAME_HEIGHT = 50
