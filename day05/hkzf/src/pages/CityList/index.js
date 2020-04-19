@@ -1,10 +1,12 @@
 import React from 'react'
-import { NavBar, Icon, Toast } from 'antd-mobile';
-import './index.css'
+import { Toast } from 'antd-mobile';
+
 import axios from 'axios'
 import { getCurrentCity } from '../../utils/index'
 import { List, AutoSizer } from 'react-virtualized'
-
+// 导入封装好的NavHeader组件
+import NavHeader from '../../components/NavHeader/index'
+import './index.css'
 
 // 索引标题高度
 const TITLE_HEIGHT = 36
@@ -162,9 +164,7 @@ export default class CityList extends React.Component {
   render() {
     return (
       <div className="citylist">
-        <NavBar mode="light" icon={<i className="iconfont icon-back" />}
-          onLeftClick={() => this.props.history.go(-1)}
-        >城市选择</NavBar>
+        <NavHeader>城市选择</NavHeader>
         {/* 城市列表 */}
         {/* 将创建好的ref对象,添加到list组件的ref上 */}
         {/* 设置list组件的scrollToAlignment方法,让list组件滚动到指定行 */}

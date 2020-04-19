@@ -1,4 +1,8 @@
 import React from 'react'
+
+// 导入封装好的NavHeader组件
+import NavHeader from '../../components/NavHeader/index'
+
 import './index.css'
 
 export default class Map extends React.Component {
@@ -14,6 +18,7 @@ export default class Map extends React.Component {
   render() {
     return (
       <div className="map">
+        <NavHeader>地图找房</NavHeader>
         <div id="container">
         </div>
       </div>

@@ -14,7 +14,7 @@ const App = (props) => {
 // 属性 fn 的类型:        函数(func)并且为必填
 // 属性 tag 的类型:       React元素(element)
 // 属性 filter 的类型:    对象({area: '上海', price: 1999})
-App.propTpes = {
+App.propTypes = {
   a: PropTypes.number,
   fn: PropTypes.func.isRequired,
   tag: PropTypes.element,
