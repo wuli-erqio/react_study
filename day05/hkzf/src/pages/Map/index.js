@@ -18,6 +18,10 @@ const labelStryle = {
 }
 export default class Map extends React.Component {
   componentDidMount() {
+    this.initMap()
+  }
+  // 初始化地图
+  initMap() {
     // 1. 获取当前定位城市
     // 2. 使用地址解析器解析当前城市坐标
     // 3. 调用centerAndZoon()方法在地图中展示当前城市，并设置缩放级别为11
@@ -26,6 +30,8 @@ export default class Map extends React.Component {
     // 创建地图实例
     // 在React全局对象使用window
     const map = new BMap.Map("container")
+    // 作用： 能够在其他方法中通过this来获取地图对象
+    this.map = map
     // 创建地址解析器实例     
     const myGeo = new BMap.Geocoder();
     // 将地址解析结果显示在地图上，并调整地图视野    
@@ -34,7 +40,8 @@ export default class Map extends React.Component {
         map.centerAndZoom(point, 11);
         map.addControl(new BMap.NavigationControl());    
         map.addControl(new BMap.ScaleControl())
-
+        // 调用renderOverLays()
+        this.renderOverlays(value)
         /*
           1. 获取数据
           2. 遍历数据，创建覆盖类，给每个覆盖物添加唯一标识
@@ -82,6 +89,46 @@ export default class Map extends React.Component {
     // var point = new BMap.Point(116.404, 39.915);
     // 地图初始化，同时设置地图展示级别
     // map.centerAndZoom(point, 15); 
+  }
+  // renderOverlays()渲染覆盖物入口： 
+  // (1)接收区域id参数，获取该区域下的房源 
+  // (2) 获取覆盖率为i行以及下级地图缩放级别
+  async renderOverlays(id) {
+    const res = await axios.get(`http://localhost:8080/area/map?id=${id}`)
+    const data = res.data.body
+    // 调用getTypeAndZoom方法获取级别和类型
+    const { nextZoom, type } = this.getTypeAndZoom()
+    data.forEach(item => {
+      // 创建覆盖物
+      this.createOverlays(item, nextZoom, type)
+    })
+  }
+  getTypeAndZoom() {
+    // 调用地图的getZoom()方法，来获取当前缩放等级
+    // 区 => 11     范围： >=10 <12
+    // 镇 => 13     范围： >=12 <14
+    // 小区 => 15   范围： >=14 <16
+    const zoom = this.map.getZoom()
+    let type, nextZoom
+    if(zoom >=10 && zoom < 12) {
+      // 区
+      // 下一个缩放级别
+      nextZoom = 13
+      // circle 表示绘制圆形覆盖物(区，镇)
+      type = 'circle'
+    } else if(zoom >=12 &&  zoom<14) {
+      // 镇
+      // 下一个缩放级别
+      nextZoom = 15
+      // circle 表示绘制圆形覆盖物(区，镇)
+      type = 'circle'
+    } else if(zoom >=14 &&  zoom<16) {
+      type = 'rect'
+    }
+    return {
+      nextZoom,
+      type
+    }
   }
   render() {
     return (
