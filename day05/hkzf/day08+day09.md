@@ -76,6 +76,23 @@
 1. 调用Label的setContent()方法，传入HTML结构，修改HTML内容样式
 2. 调用setStyle()修改覆盖物样式
 3. 给文本覆盖物添加单击事件
+```
+label.setContent(`
+  <div class="${styles.bubble}">
+    <p class="${styles.name}">${areaName}</p>
+    <p>${count}套</p>
+   </div>
+   `)
+  label.setStyle(labelStryle)
+   label.addEventListener('click', () => {
+    // (坐标对象， 地图级别)
+    map.centerAndZoom(areaPoint, 13);
+    // 除当前覆盖物, 百度地图自身报错解决，加定时器
+    setTimeout(() => {
+       map.clearOverlays()
+     }, 0);
+   })
+```
 ### 1.6 地图找房
 #### 1. 功能分析
 * 获取房源数据，渲染覆盖物
@@ -88,6 +105,20 @@
 3. 给覆盖物添加点击事件
 4. 在单击事件中，获取到当前单击项的唯一标识
 5. 放大地图(级别为13)，调用clearOverlays()方法清除当前覆盖物
+```
+const res = await axios.get(`http://localhost:8080/area/map?id=${value}`)
+res.data.body.forEach(item => {
+  const { count, label: areaName, coord: { longitude, latitude }, value } = item
+  const areaPoint = new BMap.Point(longitude, latitude)
+  // 设置setContent之后，第一个参数失效，给空就行
+  const label = new BMap.Label('', {
+  position: areaPoint,
+  offset: new BMap.Size(-30, -30)
+  })
+  label.id = value
+  // ... (1.5 - 2)
+})
+```
 #### 3. 封装流程
 1. renderOverlays()作为入口： (1)接收区域id参数，获取该区域下的房源 (2) 获取覆盖率为i行以及下级地图缩放级别
 2. createOverlays() 方法：根据传入的类型，调用对应的方法，创建覆盖物
