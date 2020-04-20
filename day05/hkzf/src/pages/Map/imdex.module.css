@@ -11,8 +11,8 @@
 }
 /* 区、镇的覆盖物样式： */
 .bubble {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   line-height: 1;
   display: inline-block;
   position: absolute;
