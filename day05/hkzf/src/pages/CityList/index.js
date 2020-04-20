@@ -7,13 +7,7 @@ import { List, AutoSizer } from 'react-virtualized'
 // 导入封装好的NavHeader组件
 import NavHeader from '../../components/NavHeader/index'
 import './index.css'
-// 导入cssModule样式
-import styles from'./imdex.module.css'
-// 索引标题高度
-const TITLE_HEIGHT = 36
-const NAME_HEIGHT = 50
-// 有房源的城市
-const HOUSE_CITY = ['北京', '上海', '深圳', '广东']
+
 // 数据格式化方法
 const formatCityData = (list) => {
   const cityList = {}
@@ -36,6 +30,10 @@ const formatCityData = (list) => {
     cityList, cityIndex
   }
 }
+// 索引标题高度
+const TITLE_HEIGHT = 36
+const NAME_HEIGHT = 50
+
 // 长列表
 // const list = Array(100).fill('OOOO')
 
@@ -48,13 +46,14 @@ const formatCityIndex = (letter) => {
       return '热门城市'
     default :
       return letter.toUpperCase()
-      break;
   }
 }
+// 有房源的城市
+const HOUSE_CITY = ['北京', '上海', '深圳', '广东']
 export default class CityList extends React.Component {
   // 在constructor中, 调用React.createRef() 创建ref对象
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       cityList: {},
       cityIndex: [],
@@ -83,21 +82,18 @@ export default class CityList extends React.Component {
 
     // 获取当前定位城市
     const curCtiy = await getCurrentCity()
-    this.setState(() => {
-      return {
-        cityList,
-        cityIndex
-      }
-    })
-
     /*
       1.将当前定位城市数据添加到cityList中
       2.将当前定位城市的索引添加到cityIndex中
     */
     cityList['#'] = [curCtiy]
     cityIndex.unshift('#')
-    console.log(curCtiy)
-
+    this.setState(() => {
+      return {
+        cityList,
+        cityIndex
+      }
+    })
   }
 
   changeCity({label, value}) {
@@ -144,8 +140,9 @@ export default class CityList extends React.Component {
   }
   // 封装renderCityIndex方法, 用来渲染城市索引列表
   renderCityIndex () {
+    console.log(this.state.cityIndex)
     const { cityIndex, activeIndex } = this.state
-    console.log(cityIndex)
+    
     // 获取索引数组cityIndex, 遍历cityIndex, 渲染索引列表
     return cityIndex.map((item, index) => <li onClick={() => {
       // 通过ref  的curren属性,获取组件实例, 在调用组件的scrollToRow方法
