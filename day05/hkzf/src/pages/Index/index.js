@@ -8,6 +8,7 @@ import Nav3 from '../../assets/images/nav-3.png'
 import Nav4 from '../../assets/images/nav-4.png'
 
 import { getCurrentCity } from '../../utils/index'
+import { BASE_URL } from '../../utils/url'
 
 import './index.css'
 const navs = [
@@ -113,7 +114,7 @@ export default class Index extends React.Component {
         style={{ display: 'inline-block', width: '100%', height: 212 }}
       >
         <img
-          src={`http://localhost:8080${item.imgSrc}`}
+          src={BASE_URL + item.imgSrc}
           alt=""
           style={{ width: '100%', height: 212, verticalAlign: 'top' }}
         />

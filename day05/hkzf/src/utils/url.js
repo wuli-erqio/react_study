@@ -1,0 +1,1 @@
+export const BASE_URL = process.env.RAECT_APP_URL

@@ -2,10 +2,11 @@ import React from 'react'
 
 // 导入封装好的NavHeader组件
 import NavHeader from '../../components/NavHeader/index'
-import { Toast } from 'antd-mobile'
+import { Toast, Link } from 'antd-mobile'
 import axios from 'axios'
 // 导入样式
 import styles from './imdex.module.css'
+import { BASE_URL } from '../../utils/url'
 
 // 解决脚手架中全局变量访问的问题
 const BMap = window.BMap
@@ -98,7 +99,8 @@ export default class Map extends React.Component {
   getTypeAndZoom() {
     // 调用地图的 getZoom() 方法，来获取当前缩放级别
     const zoom = this.map.getZoom()
-    let nextZoom, type
+    let nextZoom = ''
+    let type = ''
 
     // console.log('当前地图缩放级别：', zoom)
     if (zoom >= 10 && zoom < 12) {
@@ -159,7 +161,7 @@ export default class Map extends React.Component {
         <p>${count}套</p>
       </div>
     `)
-    label.setStyle(labelStryle)
+    label.setStyle(labelStyle)
     // 单击事件
     label.addEventListener('click', () => {
       // 调用renderOverlays方法，获取该区域下的房源信息
@@ -187,7 +189,7 @@ export default class Map extends React.Component {
       <i class="${styles.arrow}"></i>
     </div>
   `)
-    label.setStyle(labelStryle)
+    label.setStyle(labelStyle)
     // 单击事件
     label.addEventListener('click', e => {
       this.getHousesList(id)
@@ -218,7 +220,7 @@ async getHousesList(id) {
 renderHousesList() {
   return this.state.houseList.map(item => (<div className={styles.house} key={item.houseCode}>
     <div className={styles.imgWrap}>
-      <img className={styles.img} src={`http://localhost:8080${item.houseImg}`} alt="" />
+      <img className={styles.img} src={BASE_URL + item.houseImg} alt="" />
     </div>
     <div className={styles.content}>
       <h3 className={styles.title}>{item.title}</h3>

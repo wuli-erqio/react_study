@@ -138,9 +138,22 @@ res.data.body.forEach(item => {
 * 渲染获取到的房源数据
 * 调用地图panBy()方法， 移动到地图中间的位置
 * 监听地图movestart事件， 在地图移动时隐藏房源列表
+
+### 1.6 axios优化和环境变量
+#### 问题分析
+1. 在使用axios发送请求的时候，接口地址每次都要写http://localhost:8080,太频繁了。
+2. 接口域名、图片域名，分开为开发环境和生产环境，直接卸载代码中，项目发布时，很难替换。
+#### 1. 使用环境变量
+1. 在项目的根目录创建文件 .env.development
+2. 在该文件中添加环境变量RAECT_APP_URL(注意：环境变量约定以RAECT_APP_开头)
+3. 设置RAECT_APP_URL的值为： http://localhost:8008
+4. 重启脚手架
+5. 在utils/url.js文件中，创建BASE_URL变量，设置其值为process.env.RAECT_APP_URL
+6. 导出BASE_URL
+7. 使用BASE_URL修改图片
 ## 2. 列表找房模块
 #### 2.1 功能分析
-业务： 根据查询条件筛选房源列表
+业务： 根据查询条件筛选房源列表 
 功能：
 * 搜索导航栏组件封装
 * 条件筛选栏组件封装
