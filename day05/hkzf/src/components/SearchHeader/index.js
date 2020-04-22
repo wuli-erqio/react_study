@@ -25,7 +25,8 @@ function SearchHeader({ ctiyName, history, className }) {
 }
 // 添加属性校验
 SearchHeader.propTypes = {
-  ctiyName: PropTypes.string.isRequired
+  ctiyName: PropTypes.string.isRequired,
+  className: PropTypes.string
 }
 // 组件函数中无法拿到路由，要使用高阶函数包裹
 export default withRouter(SearchHeader)
