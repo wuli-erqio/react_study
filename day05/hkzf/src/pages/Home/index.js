@@ -9,7 +9,7 @@ import HouseList from '../HouseList'
 // 导入tabbar
 import { TabBar } from 'antd-mobile';
 // 导入自己的样式
-import './index.css'
+import styles from './index.module.css'
 /*
 问题： 点击导航菜单，tabbar并没有高亮
 原因： 原来我们实现该组件的时候，只考虑了点击以及第一次加载组件的情况，但是，我们为您没有考虑
@@ -76,7 +76,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div className="home">
+      <div className={styles.home}>
       <Route exact path="/home" component={Index}></Route>
       <Route path="/home/houselist" component={HouseList}></Route>
       <Route path="/home/news" component={News}></Route>
