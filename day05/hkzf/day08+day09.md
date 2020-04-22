@@ -151,6 +151,12 @@ res.data.body.forEach(item => {
 5. 在utils/url.js文件中，创建BASE_URL变量，设置其值为process.env.RAECT_APP_URL
 6. 导出BASE_URL
 7. 使用BASE_URL修改图片
+#### 2. axios优化和环境变量
+1. 在utils/api.js文件中，导入axios和BASE_URL
+2. 调用axios.create()方法创建一个axios实例
+3. 给create() 方法，添加配置baseURL,值为：BASE_URL
+4. 导出API对象
+5. 导入API,使用API代替axios,去掉接口地址的http://localhost:8080
 ## 2. 列表找房模块
 #### 2.1 功能分析
 业务： 根据查询条件筛选房源列表 
@@ -159,4 +165,11 @@ res.data.body.forEach(item => {
 * 条件筛选栏组件封装
 * 条件筛选栏筛选功能
 * 房屋列表
+#### 2.2 顶部搜索导航栏
+1. 封装首页搜索导航栏
+  1. 在components目录中创建SearchHeader/index.js
+  2. 在该组件中，复用首页中已经实现的结构、样式来封装组件
+2. 实现找房页面搜索导航栏
+  1. 在找房页面SearchHeader组件基础上，调整结构(添加返回值icon等)
+  2. 给SerachHeader组件传递className属性，来调整组件样式，让其适应找房页面效果
 ## 3. 地图找房模块

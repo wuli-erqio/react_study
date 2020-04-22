@@ -1,0 +1,24 @@
+/* 覆盖searchHeader组件样式 */
+.searchHeader {
+  position: relative;
+  top: 0;
+  padding: 0;
+}
+.header {
+  height: 45px;
+  padding: 0px 10px;
+  background-color: #f6f5f6;
+}
+
+.header :global(.icon-back) {
+  color: #999;
+  font-size: 16px;
+}
+
+.header :global(.icon-map) {
+  color: #00ae66;
+}
+
+.header :global(.search) {
+  height: 30px;
+}

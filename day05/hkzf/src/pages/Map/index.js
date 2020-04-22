@@ -1,12 +1,13 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 // 导入封装好的NavHeader组件
-import NavHeader from '../../components/NavHeader/index'
-import { Toast, Link } from 'antd-mobile'
-import axios from 'axios'
+import NavHeader from '../../components/NavHeader'
+import { Toast } from 'antd-mobile'
+
 // 导入样式
-import styles from './imdex.module.css'
+import styles from './index.module.css'
 import { BASE_URL } from '../../utils/url'
+import { API } from '../../utils/api'
 
 // 解决脚手架中全局变量访问的问题
 const BMap = window.BMap
@@ -76,7 +77,7 @@ export default class Map extends React.Component {
       // 开启loading
       Toast.loading('加载中...', 0, null, false)
 
-      const res = await axios.get(`http://localhost:8080/area/map?id=${id}`)
+      const res = await API.get(`/area/map?id=${id}`)
       // 关闭 loading
       Toast.hide()
       const data = res.data.body
@@ -99,8 +100,7 @@ export default class Map extends React.Component {
   getTypeAndZoom() {
     // 调用地图的 getZoom() 方法，来获取当前缩放级别
     const zoom = this.map.getZoom()
-    let nextZoom = ''
-    let type = ''
+    let nextZoom, type
 
     // console.log('当前地图缩放级别：', zoom)
     if (zoom >= 10 && zoom < 12) {
@@ -206,13 +206,13 @@ export default class Map extends React.Component {
 async getHousesList(id) {
   try {
     Toast.loading('加载中...', 0, null, false)
-    const res = await axios.get(`http://localhost:8080/houses?cityId=${id}`)
+    const res = await API.get(`/houses?cityId=${id}`)
     Toast.hide()
     this.setState({
       houseList: res.data.body.list,
       isShowList: true
     })
-  } catch (error) {
+  } catch (e) {
     Toast.hide()
   }
 
@@ -261,7 +261,6 @@ render() {
         </div>
         <div className={styles.houseItems}>
           {/* 房屋结构 */}
-          {/* {this.renderHousesList()} */}
           {this.renderHousesList()}
         </div>
       </div>

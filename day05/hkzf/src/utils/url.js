@@ -1,1 +1,1 @@
-export const BASE_URL = process.env.RAECT_APP_URL
+export const BASE_URL = process.env.REACT_APP_URL
