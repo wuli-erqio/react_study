@@ -172,4 +172,21 @@ res.data.body.forEach(item => {
 2. 实现找房页面搜索导航栏
   1. 在找房页面SearchHeader组件基础上，调整结构(添加返回值icon等)
   2. 给SerachHeader组件传递className属性，来调整组件样式，让其适应找房页面效果
+#### 2.3 条件筛选栏组件
+#### 1. 组件结构分析
+* 父组件： Filter
+* 子组件： FilterTitle标题菜单组件
+* 子组件： FilterPicker前三个菜单对应的内容组件
+* 子组件： FilterMore最后一个菜单对应的内容组件
+* FilterPicker内容组件， 使用antd-mobile组件库的PickerView选择器组件
+* <></> 语法是`<React.Fragment>`的简化语法，作用：不添加额外元素的情况下，返回多个节点
+```
+<React.Fragment>
+  <span>111</span><h1>标题</h1>
+</React.Fragment>
+// 简化语法
+<>
+  <span>111</span><h1>标题</h1>
+</>
+```
 ## 3. 地图找房模块
