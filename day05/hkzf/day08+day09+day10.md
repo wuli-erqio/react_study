@@ -280,3 +280,8 @@ res.data.body.forEach(item => {
 * 如果不包含，就将当前项的value添加到selectedValues数组中
 * 如果包含，就从selectedValues数组中移除(使用数组的splice方法，根据索引号删除)
 * 在渲染标签时，判断selectedValues数组中，是否包含当前项的value, 包含，就添加高亮类
+##### 3. 清除和确定按钮的逻辑处理
+* 设置FilterFooter组件的取消按钮文字为：清除
+* 点击取消按钮时，清空所有选中的值(selectedValues[])
+* 点击确定按钮时，将当前选中的值和type,传递给Filter父组件
+* 在Filter组件中的onSave方法中，接收传递过来的选中值，更新状态selectedValues

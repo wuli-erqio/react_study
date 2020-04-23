@@ -25,7 +25,18 @@ export default class Filter extends Component {
     titleSelectStatus,
     // 提供组件展示或隐藏状态
     openType: '',
-    filterData: {},
+    filterData: {
+      // FilterMore
+      roomType: [],
+      oriented: [],
+      floor: [],
+      characteristic: [],
+      // FilterPicker
+      area: {},
+      subway: {},
+      rentType: [],
+      price: []
+    },
     // 提供选中值状态
     selectedValues
   }
@@ -158,7 +169,7 @@ export default class Filter extends Component {
       return null
     }
     const data = {roomType, oriented, floor, characteristic}
-    return <FilterMore data={data}/>
+    return <FilterMore data={data} type={openType} onSave={this.onSave}/>
   }
 
   render() {

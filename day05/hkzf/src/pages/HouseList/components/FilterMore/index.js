@@ -5,10 +5,23 @@ export default class FilterMore extends Component {
   state = {
     selectedValues: []
   }
+  // 清空按钮
+  onCancle = () => {
+    this.setState({
+      selectedValues: []
+    })
+  }
+  // 确定按钮是事件处理函数
+  onOk = () => {
+    const { type, onSave } = this.props
+    // onSave是父组件的方法
+    onSave(type, this.state.selectedValues)
+  }
   renderFilter(data) {
     const { selectedValues } = this.state
     return (
       data.map(item => {
+        // 实现高亮
         const isSelected = selectedValues.indexOf(item.value) > -1
         return (<span
           onClick={() =>  this.onTagClick(item.value)}
@@ -17,6 +30,7 @@ export default class FilterMore extends Component {
       )})
     )
   }
+
 
   onTagClick (value) {
     const { selectedValues } = this.state
@@ -56,7 +70,12 @@ export default class FilterMore extends Component {
           </dl>
         </div>
         {/* 底部按钮 */}
-        <FilterFooter className={styles.footer} />
+        <FilterFooter
+          className={styles.footer}
+          cancelText="清除"
+          onCancle={this.onCancle}
+          onOk={this.onOk}
+          />
       </div>
     )
   }
