@@ -8,7 +8,7 @@ const titleList = [
   { title: '租金', type: 'price' },
   { title: '筛选', type: 'more' }
 ]
-export default function FilterTitle({ titleSelectStatus }) {
+export default function FilterTitle({ titleSelectStatus, onClick }) {
 
   return (
     <Flex align="center" className={styles.root}>
@@ -16,7 +16,7 @@ export default function FilterTitle({ titleSelectStatus }) {
         titleList.map(item => {
           const isSelected  = titleSelectStatus[item.type]
           return (
-            <Flex.Item key={item.type}>
+            <Flex.Item key={item.type} onClick={() => onClick(item.type)}>
               <span className={[styles.dropdown, isSelected ? styles.selected : ''].join(' ')}>
                 <span>{item.title}</span>
                 <i className="iconfont icon-arrow"></i>

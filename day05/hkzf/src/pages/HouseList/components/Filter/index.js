@@ -13,6 +13,19 @@ export default class Filter extends Component {
   state = {
     titleSelectStatus,
   }
+  // 点击标题高亮事件
+  // this指向问题
+  onTitleClick = (type) => {
+    this.setState(prevState => {
+      return {
+        titleSelectStatus: {
+          // 获取当前的对象所有属性值
+          ...prevState.titleSelectStatus,
+          [type]: true
+        }
+      }
+    })
+  }
   render() {
     const { titleSelectStatus } = this.state
     return (
@@ -21,7 +34,7 @@ export default class Filter extends Component {
         {/* <div className={styles.mask}></div> */}
         <div className={styles.content}>
           {/* 标题 */}
-          <FilterTitle titleSelectStatus={titleSelectStatus} ></FilterTitle>
+          <FilterTitle titleSelectStatus={titleSelectStatus} onClick={this.onTitleClick}></FilterTitle>
           {/* 前三个菜单的对应内容 */}
           {/* <FilterPicker></FilterPicker> */}
           {/* 最后一个菜单的对应内容 */}
