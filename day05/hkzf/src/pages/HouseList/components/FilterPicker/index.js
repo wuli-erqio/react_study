@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import FilterFooter from '../../../../components/FilterFooter'
 import { PickerView } from 'antd-mobile';
-import styles from './index.module'
+import styles from './index.module.css'
 const province = [
   { label: '北京', value: '01', children: [
       { label: '东城区', value: '01-1' },

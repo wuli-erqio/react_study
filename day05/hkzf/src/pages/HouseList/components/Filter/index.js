@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import FilterTitle from '../FilterTitle'
 import FilterMore from '../FilterMore'
 import FilterPicker from '../FilterPicker'
-import styles from './index.module'
+import styles from './index.module.css'
 export default class Filter extends Component {
   render() {
     return (

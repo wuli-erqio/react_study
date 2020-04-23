@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import FilterFooter from '../../../../components/FilterFooter'
-import styles from './index.module'
+import styles from './index.module.css'
 export default class FilterMore extends Component {
   renderFilter() {
     return (
