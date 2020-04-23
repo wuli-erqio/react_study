@@ -12,13 +12,23 @@ const province = [
   }
 ]
 export default class FilterPicker extends Component {
+  state = {
+    value: null
+  }
   render() {
-    const { onCancel, onSave, data, cols } = this.props
+    const { onCancel, onSave, data, cols, type } = this.props
+    const { value } = this.state
     return (
       <>
-        {/* 选择器组件 */}
-        <PickerView data={data} value={null} cols={cols} />
-        <FilterFooter onCancel={() => onCancel()} onOk = {() => onSave()}></FilterFooter>
+        {/* 选择器组件
+            注意：一定要设置组件value属性的值，为当前选中状态的值，否则，无法实现切换选中项
+         */}
+        <PickerView data={data} value={value} cols={cols} onChange={val => {
+          this.setState({
+            value: val
+          })
+        }}/>
+        <FilterFooter onCancel={() => onCancel()} onOk={() => onSave(type, value)}></FilterFooter>
       </>
     );
   }

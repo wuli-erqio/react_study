@@ -52,14 +52,15 @@ export default class Filter extends Component {
   }
 
   // 取消隐藏对话框
-  onCancel = () => {
+  onCancel = (type, value) => {
     this.setState({
       // 隐藏对话框
       openType: ''
     })
   }
   // 确定
-  onSave = () => {
+  onSave = (type, value) => {
+    console.log(type, value)
     this.setState({
       // 隐藏对话框
       openType: ''
@@ -92,7 +93,12 @@ export default class Filter extends Component {
       default:
         break;
     }
-    return <FilterPicker onCancel={this.onCancel} onSave={this.onSave} data={data} cols={cols}/>
+    return <FilterPicker
+      onCancel={this.onCancel}
+      onSave={this.onSave}
+      data={data}
+      cols={cols}
+      type={openType}/>
   }
 
   render() {
@@ -106,7 +112,9 @@ export default class Filter extends Component {
         }
         <div className={styles.content}>
           {/* 标题 */}
-          <FilterTitle titleSelectStatus={titleSelectStatus} onClick={this.onTitleClick} />
+          <FilterTitle
+            titleSelectStatus={titleSelectStatus}
+            onClick={this.onTitleClick} />
           { this.renderFilterPicker() }
           {/* 前三个菜单的对应内容 */}
           {/* <FilterPicker></FilterPicker> */}

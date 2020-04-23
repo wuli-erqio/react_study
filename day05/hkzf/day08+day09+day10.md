@@ -237,4 +237,7 @@ res.data.body.forEach(item => {
 * 在方法中，根据openType的类型，从filtersData中获取到需要的数据
 * 将数据通过props传递给FilterPicker组件
 * FilterPicker组件接收到数据后，将其作为PickerView组件的data(数据源)
-## 3. 地图找房模块
+##### 3. 获取选中值
+* 在FilterPicker组件中，添加状态value(用于PickerView 组件的选中值)
+* 给PickerView组件添加配置项onChange，通过参数获取到选中值，并更新状态value
+* 在确定按钮的事件处理程序中，将type和value作为参数传递给父组件
