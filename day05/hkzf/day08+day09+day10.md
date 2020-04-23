@@ -273,3 +273,10 @@ res.data.body.forEach(item => {
 * 从FilterData中，获取数据(roomType,oriented,floor,characteristic),通过props传递给FilterMore组件
 * FilterMore组件中，通过props获取到数据，分别将数据传递给renderFilters方法
 * 在renderFilters方法中，通过参数接受数据，遍历数据，渲染标签
+##### 2. 获取选中值以及设置高度
+* 在state中添加状态selectedValues(表示选中项的值)
+* 给标签绑定单击事件，通过参数获取到当前项的value
+* 判断selectedValues中是否包含当前项的value值
+* 如果不包含，就将当前项的value添加到selectedValues数组中
+* 如果包含，就从selectedValues数组中移除(使用数组的splice方法，根据索引号删除)
+* 在渲染标签时，判断selectedValues数组中，是否包含当前项的value, 包含，就添加高亮类

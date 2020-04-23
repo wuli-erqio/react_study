@@ -2,15 +2,37 @@ import React, {Component} from 'react'
 import FilterFooter from '../../../../components/FilterFooter'
 import styles from './index.module.css'
 export default class FilterMore extends Component {
+  state = {
+    selectedValues: []
+  }
   renderFilter(data) {
+    const { selectedValues } = this.state
     return (
-    data.map(item => <span
-      key={item.value}
-      className={[styles.tag, styles.tagActive].join(' ')}>{item.label}</span>
-      )
+      data.map(item => {
+        const isSelected = selectedValues.indexOf(item.value) > -1
+        return (<span
+          onClick={() =>  this.onTagClick(item.value)}
+          key={item.value}
+          className={[styles.tag, isSelected ? styles.tagActive : ''].join(' ')}>{item.label}</span>
+      )})
     )
   }
 
+  onTagClick (value) {
+    const { selectedValues } = this.state
+    const newSelectedValues = [...selectedValues]
+    if(selectedValues.indexOf(value) <= -1) {
+      // 没有当前项是情况
+      newSelectedValues.push(value)
+    } else {
+      // 有当前项是情况
+      const index = newSelectedValues.findIndex(item => item === value)
+      newSelectedValues.splice(index, 1)
+    }
+    this.setState({
+      selectedValues: newSelectedValues
+    })
+  }
   render() {
     const { data: {roomType,oriented,floor,characteristic} } = this.props
     return (

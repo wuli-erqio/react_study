@@ -8,3 +8,10 @@
     position: fixed;
     bottom: 0;    
 }
+.home :global(.am-tab-bar) {
+    height: 50px;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
