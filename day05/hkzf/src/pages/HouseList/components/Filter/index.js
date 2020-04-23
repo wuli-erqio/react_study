@@ -18,7 +18,7 @@ const selectedValues = {
   area: ['area', 'null'],
   mode: ['null'],
   price: ['null'],
-  more: ['null']
+  more: []
 }
 export default class Filter extends Component {
   state = {
@@ -38,7 +38,6 @@ export default class Filter extends Component {
     // 获取当前定位城市
     const { value } = JSON.parse(localStorage.getItem('hkzf_city'))
     const res = await API.get(`/houses/condition?id=${value}`)
-    console.log(res)
     this.setState({
       filterData: res.data.body
     })
