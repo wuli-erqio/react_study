@@ -246,3 +246,8 @@ res.data.body.forEach(item => {
 * 根据openType获取当前类型的选中值(defaultValue),通过props传递FilterPicker组件
 * 在FilterPicker组件中，将defaultValue设种子为状态value的默认值
 * 在点击确定按钮后，在父组件中更新当前type对用的selectedValues状态值
+##### 5. 设置默认选中值问题
+* 问题： 在前面三个标题之间来回切换时，默认选中值不生效，当点击确定，重新打开FilterPicker组件时，才会生效
+* 分析：两种操作方式区别在于有没有重新创建FilterPicker组件，重新创建FilterPicker组件时，会生效；不重新创建FilterPicker组件时，不会生效
+* 原因： 不重新创建FilterPicker组件时，不会再次执行state初始化，也就那不到最新的props
+* 解决方式： 给FilterPicker组件添加key值为openType，这样，在不同标题之间切换时，key值都不相同，React内部会在key不同时，重新创建该组件

@@ -113,6 +113,7 @@ export default class Filter extends Component {
         break;
     }
     return <FilterPicker
+      key={openType}
       onCancel={this.onCancel}
       onSave={this.onSave}
       data={data}
