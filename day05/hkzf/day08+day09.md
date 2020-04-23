@@ -230,4 +230,11 @@ res.data.body.forEach(item => {
 * 在onCancel方法中，修改状态openType为空，隐藏对话框
 * 将onCancel通过props传递给FilterPicker组件，在取消按钮的单击事件中调用该方法
 * 在Filter组件中，提供onSave方法， 作为确定按钮的事件处理程序，逻辑同上
+##### 2. 获取当前筛选条件的数据
+* 在Filter组件中，发送请求，获取所有筛选条件数据
+* 将数据保存为状态： filterData
+* 封装方法renderFilterPicker来渲染FilterPicker组件
+* 在方法中，根据openType的类型，从filtersData中获取到需要的数据
+* 将数据通过props传递给FilterPicker组件
+* FilterPicker组件接收到数据后，将其作为PickerView组件的data(数据源)
 ## 3. 地图找房模块
