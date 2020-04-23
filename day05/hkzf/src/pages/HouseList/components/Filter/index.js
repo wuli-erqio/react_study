@@ -46,17 +46,48 @@ export default class Filter extends Component {
   // 点击标题高亮事件
   // this指向问题
   onTitleClick = (type) => {
-    this.setState(prevState => {
-      return {
-        titleSelectStatus: {
-          // 获取当前的对象所有属性值
-          ...prevState.titleSelectStatus,
-          [type]: true
-        },
-        // 展示对话框
-        openType: type,
+    const {titleSelectStatus, selectedValues } = this.state
+    // 创建新的标题选中状态
+    const newTitleSelectedStatus = {...titleSelectStatus}
+    // 遍历标题选中状态
+    // 返回值是个数组
+    Object.keys(titleSelectStatus).forEach( item => {
+      // item 表示数组中的每一项，此处，就是每个标题的type值
+      if(item === type) {
+        // 当前标题
+        newTitleSelectedStatus[type] = true
+        return
+      }
+      // 其他标题
+      const selectedVal = selectedValues[item]
+      if (item === 'area' && (selectedVal.length !== 2 || selectedVal[0] !== 'area')) {
+        // 高亮
+        newTitleSelectedStatus[item] = true
+      } else if (item === 'mode' && selectedVal[0] !== 'null') {
+        newTitleSelectedStatus[item] = true
+      } else if(item === 'price' && selectedVal[0] !== 'null') {
+        newTitleSelectedStatus[item] = true
+      } else if (item === 'more') {
+        // 更多选择项
+      } else {
+        newTitleSelectedStatus[item] = false
       }
     })
+    this.setState({
+      openType: type,
+      titleSelectStatus: newTitleSelectedStatus
+    })
+    // this.setState(prevState => {
+    //   return {
+    //     titleSelectStatus: {
+    //       // 获取当前的对象所有属性值
+    //       ...prevState.titleSelectStatus,
+    //       [type]: true
+    //     },
+    //     // 展示对话框
+    //     openType: type,
+    //   }
+    // })
   }
 
   // 取消隐藏对话框
