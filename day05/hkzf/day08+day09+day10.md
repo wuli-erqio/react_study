@@ -241,3 +241,8 @@ res.data.body.forEach(item => {
 * 在FilterPicker组件中，添加状态value(用于PickerView 组件的选中值)
 * 给PickerView组件添加配置项onChange，通过参数获取到选中值，并更新状态value
 * 在确定按钮的事件处理程序中，将type和value作为参数传递给父组件
+##### 4. 设置默认选中值
+* 在Filter组件中，提供选中值状态： selectValues
+* 根据openType获取当前类型的选中值(defaultValue),通过props传递FilterPicker组件
+* 在FilterPicker组件中，将defaultValue设种子为状态value的默认值
+* 在点击确定按钮后，在父组件中更新当前type对用的selectedValues状态值

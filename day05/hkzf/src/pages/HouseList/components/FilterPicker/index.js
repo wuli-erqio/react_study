@@ -13,7 +13,7 @@ const province = [
 ]
 export default class FilterPicker extends Component {
   state = {
-    value: null
+    value: this.props.defaultValue
   }
   render() {
     const { onCancel, onSave, data, cols, type } = this.props

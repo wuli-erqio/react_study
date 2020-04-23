@@ -13,12 +13,21 @@ const titleSelectStatus = {
   price: false,
   more: false
 }
+
+const selectedValues = {
+  area: ['area', 'null'],
+  mode: ['null'],
+  price: ['null'],
+  more: ['null']
+}
 export default class Filter extends Component {
   state = {
     titleSelectStatus,
     // 提供组件展示或隐藏状态
     openType: '',
-    filterData: {}
+    filterData: {},
+    // 提供选中值状态
+    selectedValues
   }
   componentDidMount() {
     this.getFilterData()
@@ -63,13 +72,22 @@ export default class Filter extends Component {
     console.log(type, value)
     this.setState({
       // 隐藏对话框
-      openType: ''
+      openType: '',
+      selectedValues: {
+        ...this.state.selectedValues,
+        // 只更新当前type对应的选中值
+        [type]: value
+      }
     })
   }
 
   // 渲染FilterPicker组件的方法
   renderFilterPicker() {
-    const { openType, filterData: {area, subway, rentType, price} } = this.state
+    const {
+      openType,
+      filterData: {area, subway, rentType, price},
+      selectedValues
+    } = this.state
     if(openType !== 'area' && openType !== 'mode' && openType !== 'price') {
       return null
     }
@@ -77,6 +95,7 @@ export default class Filter extends Component {
     // 根据openType来拿到当前筛选条件数据
     let data = []
     let cols = 3
+    let defaultValue = selectedValues[openType]
     switch(openType) {
       case 'area':
         data = [area, subway]
@@ -98,7 +117,8 @@ export default class Filter extends Component {
       onSave={this.onSave}
       data={data}
       cols={cols}
-      type={openType}/>
+      type={openType}
+      defaultValue={defaultValue}/>
   }
 
   render() {
