@@ -152,6 +152,15 @@ export default class Filter extends Component {
       defaultValue={defaultValue}/>
   }
 
+  renderFilterMore() {
+    const { openType, filterData:{roomType,oriented,floor,characteristic} } = this.state
+    if(openType !== 'more') {
+      return null
+    }
+    const data = {roomType, oriented, floor, characteristic}
+    return <FilterMore data={data}/>
+  }
+
   render() {
     const { titleSelectStatus, openType } = this.state
     return (
@@ -166,11 +175,10 @@ export default class Filter extends Component {
           <FilterTitle
             titleSelectStatus={titleSelectStatus}
             onClick={this.onTitleClick} />
-          { this.renderFilterPicker() }
           {/* 前三个菜单的对应内容 */}
-          {/* <FilterPicker></FilterPicker> */}
+          { this.renderFilterPicker() }
           {/* 最后一个菜单的对应内容 */}
-          {/* <FilterMore></FilterMore> */}
+          { this.renderFilterMore() }
         </div>
       </div>
     )

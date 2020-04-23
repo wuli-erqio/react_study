@@ -267,3 +267,9 @@ res.data.body.forEach(item => {
 * 如果不同，则设置该标题的选中状态为true
 * 如果相同，则设置该标题的选中值状态为false
 * 更新状态titleSelectedStatus的值为：newTitleSelectedStatus
+#### 2.6 FilterMore组件
+##### 1. 渲染组件数据
+* 封装renderFilterMore方法，渲染FilterMore组件
+* 从FilterData中，获取数据(roomType,oriented,floor,characteristic),通过props传递给FilterMore组件
+* FilterMore组件中，通过props获取到数据，分别将数据传递给renderFilters方法
+* 在renderFilters方法中，通过参数接受数据，遍历数据，渲染标签
