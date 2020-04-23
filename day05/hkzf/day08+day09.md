@@ -222,4 +222,12 @@ res.data.body.forEach(item => {
 * 功能四：点击确定按钮，隐藏该组件，将获取到筛选条件值传递给父组件
 * 展示或隐藏对话框的状态：有父组件提供(状态提升)，通过props传递给子组件
 * 筛选条件数据： 有父组件提供(因为所有筛选条件是通过一个接口来获取的)，通过props传递给子组件
+##### 1. 控制组件的展示与隐藏
+* 在Filter组件中，提供组件展示或隐藏状态：openType(表示展示的对话框类型)
+* 在render中判断openType值为area/mode/price时，就展示FilterPicker组件，以及遮罩层。
+* 在onTitleClick方法中，修改状态openType为当前type，展示对话框
+* 在Filter组件中，提供onCancel方法(作为取消和遮罩层的事件处理程序)
+* 在onCancel方法中，修改状态openType为空，隐藏对话框
+* 将onCancel通过props传递给FilterPicker组件，在取消按钮的单击事件中调用该方法
+* 在Filter组件中，提供onSave方法， 作为确定按钮的事件处理程序，逻辑同上
 ## 3. 地图找房模块
