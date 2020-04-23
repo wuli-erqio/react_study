@@ -285,3 +285,9 @@ res.data.body.forEach(item => {
 * 点击取消按钮时，清空所有选中的值(selectedValues[])
 * 点击确定按钮时，将当前选中的值和type,传递给Filter父组件
 * 在Filter组件中的onSave方法中，接收传递过来的选中值，更新状态selectedValues
+##### 4. 设置默认选中值
+* 在渲染FilterMore组件时，从selectedValues中，获取到当前选中值more
+* 通过props将选中值传递给FilterMore组件
+* 在FilterMore组件中，将后渠道的选中值，设置为子组件状态的selectedValues的默认值
+* 给遮罩层绑定单击事件
+* 在单击事件中，调用父组件的方法onCancel关闭FilterMore组件

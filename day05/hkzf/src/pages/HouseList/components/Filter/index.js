@@ -103,6 +103,7 @@ export default class Filter extends Component {
 
   // 取消隐藏对话框
   onCancel = (type, value) => {
+    console.log(this.state.openType)
     this.setState({
       // 隐藏对话框
       openType: ''
@@ -164,12 +165,27 @@ export default class Filter extends Component {
   }
 
   renderFilterMore() {
-    const { openType, filterData:{roomType,oriented,floor,characteristic} } = this.state
+    const { 
+      selectedValues, 
+      openType, 
+      filterData:{roomType, oriented, floor, characteristic}
+    } = this.state
     if(openType !== 'more') {
       return null
     }
-    const data = {roomType, oriented, floor, characteristic}
-    return <FilterMore data={data} type={openType} onSave={this.onSave}/>
+    const data = {
+      roomType,
+      oriented,
+      floor,
+      characteristic
+    }
+    const defaultValue = selectedValues.more
+    return <FilterMore
+      data={data}
+      type={openType}
+      onSave={this.onSave}
+      onCancel={this.onCancel}
+      defaultValue={defaultValue}/>
   }
 
   render() {
@@ -179,7 +195,7 @@ export default class Filter extends Component {
         {/* 前三个菜单的遮罩层 */}
         {
           (openType === 'area' || openType === 'mode' || openType === 'price')
-          ? (<div className={styles.mask} onCancel={this.onCancel} />) : null
+          ? (<div className={styles.mask} onClick={this.onCancel} />) : null
         }
         <div className={styles.content}>
           {/* 标题 */}

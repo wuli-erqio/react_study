@@ -3,10 +3,10 @@ import FilterFooter from '../../../../components/FilterFooter'
 import styles from './index.module.css'
 export default class FilterMore extends Component {
   state = {
-    selectedValues: []
+    selectedValues: this.props.defaultValue
   }
   // 清空按钮
-  onCancle = () => {
+  onCancel = () => {
     this.setState({
       selectedValues: []
     })
@@ -52,7 +52,7 @@ export default class FilterMore extends Component {
     return (
       <div className={styles.root}>
         {/* 前三个菜单的遮罩层 */}
-        <div className={styles.mask}></div>
+        <div className={styles.mask} onClick={this.props.onCancel}></div>
         {/* 条件内容 */}
         <div className={styles.tags}>
           <dl  className={styles.dl}>
@@ -73,7 +73,7 @@ export default class FilterMore extends Component {
         <FilterFooter
           className={styles.footer}
           cancelText="清除"
-          onCancle={this.onCancle}
+          onCancel={this.onCancel}
           onOk={this.onOk}
           />
       </div>
