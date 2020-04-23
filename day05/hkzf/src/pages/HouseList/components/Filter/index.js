@@ -68,12 +68,31 @@ export default class Filter extends Component {
 
   // 渲染FilterPicker组件的方法
   renderFilterPicker() {
-    const { openType } = this.state
-
+    const { openType, filterData: {area, subway, rentType, price} } = this.state
     if(openType !== 'area' && openType !== 'mode' && openType !== 'price') {
       return null
     }
-    return <FilterPicker onCancel={this.onCancel} onSave={this.onSave} />
+
+    // 根据openType来拿到当前筛选条件数据
+    let data = []
+    let cols = 3
+    switch(openType) {
+      case 'area':
+        data = [area, subway]
+        cols = 3
+        break;
+      case 'mode':
+        data = rentType
+        cols = 1
+        break;
+      case 'price':
+        data = price
+        cols = 1
+        break;
+      default:
+        break;
+    }
+    return <FilterPicker onCancel={this.onCancel} onSave={this.onSave} data={data} cols={cols}/>
   }
 
   render() {
