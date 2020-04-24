@@ -6,6 +6,8 @@ import { API } from '../../utils/api'
 import { List, AutoSizer, WindowScroller, InfiniteLoader } from 'react-virtualized'
 import HouseItem from '../../components/HouseItem'
 import { BASE_URL} from '../../utils/url'
+
+import Sticky from '../../components/Sticky'
 import styles from './index.module.css'
 
 // 获取当前定位城市信息
@@ -105,7 +107,9 @@ export default class HouseList extends React.Component {
           <SearchHeader cityName={label} className={styles.searchHeader}></SearchHeader>
         </Flex>
         {/* 条件筛选菜单 */}
-        <Filter onFilter={this.onFilter}/>
+        <Sticky>
+          <Filter onFilter={this.onFilter}/>
+        </Sticky>
         {/* 房屋列表 */}
         <div className={styles.houseItem}>
           <InfiniteLoader

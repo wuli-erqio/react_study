@@ -363,3 +363,13 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
 * 如果不在，就吸顶
 * 问题: 吸顶后，元素脱标，房屋列表会突然突然跳动筛选栏的高度，如何解决？
 * 解决方式： 使用跟筛选栏高度相同的占位元素，在筛选栏脱标后，代替他撑起高度
+##### 2. 实现步骤
+* 封装Sticky组件
+* 在HouseList页面中，导入Sticky组件
+* 使用Sticky组件包裹要实现的吸顶功能的组件
+* 在Sticky组件中，创建两个ref对象(placeholder、content) 分别指向占位元素和内容元素
+* 组件中，监听浏览器的scro事件(注意销毁事件)
+* 在scroll事件中，通过getBoundingClientRect()方法得到筛选栏占位元素当前位置(top)
+* 判断top是否小于0(是否在可视区内)
+* 如果小于，就添加需要吸顶的样式(fixed)，同时设置占位元素高度(与条件筛选栏高度相同)
+* 否则， 就移除吸顶样式，同时让占位元素高度为0
