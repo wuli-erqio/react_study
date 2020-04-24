@@ -48,11 +48,11 @@ export default class FilterMore extends Component {
     })
   }
   render() {
-    const { data: {roomType,oriented,floor,characteristic} } = this.props
+    const { data: {roomType,oriented,floor,characteristic}, onCancel, type} = this.props
     return (
       <div className={styles.root}>
         {/* 前三个菜单的遮罩层 */}
-        <div className={styles.mask} onClick={this.props.onCancel}></div>
+        <div className={styles.mask} onClick={() => onCancel(type)}></div>
         {/* 条件内容 */}
         <div className={styles.tags}>
           <dl  className={styles.dl}>

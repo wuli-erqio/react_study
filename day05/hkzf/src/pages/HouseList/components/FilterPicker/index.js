@@ -28,7 +28,7 @@ export default class FilterPicker extends Component {
             value: val
           })
         }}/>
-        <FilterFooter onCancel={() => onCancel()} onOk={() => onSave(type, value)}></FilterFooter>
+        <FilterFooter onCancel={() => onCancel(type)} onOk={() => onSave(type, value)}></FilterFooter>
       </>
     );
   }

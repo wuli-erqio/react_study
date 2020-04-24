@@ -267,7 +267,7 @@ res.data.body.forEach(item => {
 * 如果不同，则设置该标题的选中状态为true
 * 如果相同，则设置该标题的选中值状态为false
 * 更新状态titleSelectedStatus的值为：newTitleSelectedStatus
-#### 2.6 FilterMore组件
+#### 2.7 FilterMore组件
 ##### 1. 渲染组件数据
 * 封装renderFilterMore方法，渲染FilterMore组件
 * 从FilterData中，获取数据(roomType,oriented,floor,characteristic),通过props传递给FilterMore组件
@@ -291,3 +291,9 @@ res.data.body.forEach(item => {
 * 在FilterMore组件中，将后渠道的选中值，设置为子组件状态的selectedValues的默认值
 * 给遮罩层绑定单击事件
 * 在单击事件中，调用父组件的方法onCancel关闭FilterMore组件
+#### 2.8 完成FilterTitle高亮功能
+##### 步骤
+* 在Filter组件的onTitleClick方法中，添加type为more的判断条件
+* 当选中的数值长度不为0时，表示FilterMore组件中有选择项，此时，设置选中状态高亮
+* 在点击确定按钮时，根据参数type和value，判断当前菜单是否高亮
+* 在关闭对话框时(onCancel)，根据type和当前type的选中值，判断当前菜单是否高亮
