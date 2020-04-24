@@ -315,3 +315,8 @@ res.data.body.forEach(item => {
 * 给HouseList组件添加属性filters,值为对象
 * 添加两个状态： list和count(存储房屋列表数据和总条数)
 * 将获取到的房屋列表数据，存储到state中
+#### 2.10 渲染房屋列表数据
+##### 1. 使用List组件渲染数据
+* 封装HouseItem组件，实现Map和HouseList页面中，房屋列表项的复用
+* 使用HouseItem组件改造Map组件的房屋列表项
+* 使用react-virtualized的List组件渲染房屋列表(参考CityList组件的使用)

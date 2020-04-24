@@ -22,3 +22,7 @@
 .header :global(.search) {
   height: 30px;
 }
+
+.houseItem {
+  padding: 0 15px;
+}
