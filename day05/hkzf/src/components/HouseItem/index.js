@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './index.module.css'
 
-function HouseItem({ src, title, desc, tags, price, onclick}) {
+function HouseItem({ src, title, desc, tags, price, onclick, style}) {
   return (
-    <div className={styles.house} onClick={onclick}>
+    <div className={styles.house} onClick={onclick} style={style}>
       <div className={styles.imgWrap}>
         <img className={styles.img} src={src} alt="" />
       </div>

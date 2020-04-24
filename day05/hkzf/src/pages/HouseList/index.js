@@ -1,12 +1,12 @@
 import React from 'react'
 import SearchHeader from '../../components/SearchHeader'
 import { Flex } from 'antd-mobile'
-import styles from './index.module.css'
 import Filter from './components/Filter'
 import { API } from '../../utils/api'
 import { List, AutoSizer, WindowScroller, InfiniteLoader } from 'react-virtualized'
 import HouseItem from '../../components/HouseItem'
 import { BASE_URL} from '../../utils/url'
+import styles from './index.module.css'
 
 // 获取当前定位城市信息
 const { label, value } = JSON.parse(localStorage.getItem('hkzf_city'))
@@ -46,19 +46,26 @@ export default class HouseList extends React.Component {
   }
 
    // 渲染每一行的内容函数rowRenderer
-  renderHouseList = ({
-    key,  
-    index,
-    style 
-  }) => {
+  renderHouseList = ({ key, index, style }) => {
     // 根据索引号来获取当前这一行的房屋数据
     const { list } = this.state
     const house = list[index]
+    // 判断house是否存在
+    // 如果不存在，渲染loading元素占位
+    if (!house) {
+      return (
+        <div key={key} style={style}>
+          <p className={styles.loading} />
+        </div>
+      )
+    }
+
     return (
       <HouseItem
-        title={house.title}
-        key={key} style={style}
+        key={key}
+        style={style}
         src={BASE_URL + house.houseImg}
+        title={house.title}
         desc={house.desc}
         tags={house.tags}
         price={house.price}></HouseItem>
@@ -71,8 +78,21 @@ export default class HouseList extends React.Component {
   // 用来获取更多房屋列表数据
   // 注意，该方法返回的值是一个Promise对象，并且，这个对象应该在数据加载完成时来调用resolve让Promise对象的状态变为已完成
   loadMoreRows = ({ startIndex, stopIndex}) => {
-    return new Promise(resolve => {
-      // 
+    return new Promise(resolve => { API.get('/houses', {
+        params: {
+          cityId: value,
+          ...this.filters,
+          start: startIndex,
+          end: stopIndex
+        }
+      }).then(res => {
+        this.setState({
+          list: [...this.state.list, ...res.data.body.list]
+        })
+
+        // 数据加载完成时，调用 resolve 即可
+        resolve()
+      })
     })
   }
   render() {

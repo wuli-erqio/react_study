@@ -350,3 +350,9 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
 {({ onRowsRendered, registerChild}) => {}}
 </InfiniteLoader>
 ```
+##### 4. 加载更多房屋列表数据
+1. 在loadMoreRows方法中，根据起始和接数索引，获取更多房屋数据
+2. 获取到最新的数据后，与当前list中的数据合并，并调用Promise的resolve()
+3. 在renderHouseList方法中，判断house是否存在
+4. 不存在的时候，就渲染一个loading元素(防止拿不到数据报错)
+5. 存在的时候，在渲染HouseItem组件
