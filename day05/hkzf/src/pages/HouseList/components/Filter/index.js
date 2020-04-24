@@ -152,13 +152,34 @@ export default class Filter extends Component {
     } else {
       newTitleSelectedStatus[type] = false
     }
+    const newSelectedValues = {
+      ...this.state.selectedValues,
+      // 只更新当前type 对应的选中值
+      [type]: value
+    }
+    const { area, mode, price, more } = newSelectedValues
+    // 筛选条件数据
+    const filters = {}
+    // 区域
+    const areaKey = area[0]
+    let areaValue = 'null'
+    if(area.length === 3) {
+      areaValue = area[2] !== 'null' ? area[2] : area[1]
+    }
+    filters[areaKey] = areaValue
+    // 方式和组件
+    filters[mode] = mode[0]
+    filters[price] = price[0]
 
+    // 更多筛选条件 more
+    filters[more] = more.join(',')
     // 隐藏对话框
     this.setState({
       openType: '',
 
       // 更新菜单高亮状态数据
-      titleSelectedStatus: newTitleSelectedStatus
+      titleSelectedStatus: newTitleSelectedStatus,
+      selectedValues: newSelectedValues
     })
   }
 
