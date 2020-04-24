@@ -337,3 +337,16 @@ res.data.body.forEach(item => {
 }
 </WindowScroller>
 ```
+##### 3. InfiniteLoader组件
+* 需求：滚动房屋列表时，动态加载更多房屋数据
+* 解决方式： 使用InfiniteLoader组件，来实现无限滚动列表，从而加载更多房屋列表
+* 根据InfiniteLoader组件文档示例，在该项目使用该组件
+```
+// isRowLoader表示没一行数据是否加载完成
+// loadMoreRows加载更多数据的方法，在需要加载更多数据时，会调用该方法
+//rowCount列表数据总条数
+<InfiniteLoader
+isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
+{({ onRowsRendered, registerChild}) => {}}
+</InfiniteLoader>
+```
