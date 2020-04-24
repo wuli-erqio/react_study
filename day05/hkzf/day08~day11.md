@@ -356,3 +356,10 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
 3. 在renderHouseList方法中，判断house是否存在
 4. 不存在的时候，就渲染一个loading元素(防止拿不到数据报错)
 5. 存在的时候，在渲染HouseItem组件
+#### 2.11 条件筛选栏吸顶功能
+##### 1. 实现思路
+* 在页面滚动的时候，判断筛选蓝上边是否还在可视区域内
+* 如果在，就不需要吸顶
+* 如果不在，就吸顶
+* 问题: 吸顶后，元素脱标，房屋列表会突然突然跳动筛选栏的高度，如何解决？
+* 解决方式： 使用跟筛选栏高度相同的占位元素，在筛选栏脱标后，代替他撑起高度
