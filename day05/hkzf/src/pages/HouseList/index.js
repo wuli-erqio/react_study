@@ -6,12 +6,21 @@ import Filter from './components/Filter'
 import { API } from '../../utils/api'
 
 // 获取当前定位城市信息
-const { label } = JSON.parse(localStorage.getItem('hkzf_city'))
+const { label, value } = JSON.parse(localStorage.getItem('hkzf_city'))
 export default class HouseList extends React.Component {
-
+  state = {
+    // 列表数据
+    list: [],
+    // 总条数
+    count: 0
+  }
+  // 初始化实例属性
+  filters = {}
+  componentDidMount() {
+    this.searchHouseList()
+  }
   // 获取房屋列表数据
   async searchHouseList() {
-    const { value } = localStorage.getItem('hkzf_city')
     const res = await API.get('/houses', {
       params: {
         cityId: value,
@@ -20,7 +29,12 @@ export default class HouseList extends React.Component {
         end: 20
       }
     })
+    const { list, count } = res.data.body
     console.log(res)
+    this.setState({
+      list,
+      count
+    })
   }
   // 接收Filter组件中筛选条件数据
   onFilter = (filters) => {

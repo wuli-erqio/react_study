@@ -310,3 +310,8 @@ res.data.body.forEach(item => {
 * 创建方法searchHouseList(用来获取房屋列表数据)
 * 根据接口，获取当前定位城市id参数
 * 将筛选条件数据与分页数据合并后，作为接口的参数，发送请求，获取房屋数据
+##### 2. 进入页面时获取数据
+* 在componentDidMount钩子函数，调用searchHouseList, 来表现房屋列表数据
+* 给HouseList组件添加属性filters,值为对象
+* 添加两个状态： list和count(存储房屋列表数据和总条数)
+* 将获取到的房屋列表数据，存储到state中
