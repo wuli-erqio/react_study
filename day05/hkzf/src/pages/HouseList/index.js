@@ -3,10 +3,30 @@ import SearchHeader from '../../components/SearchHeader'
 import { Flex } from 'antd-mobile'
 import styles from './index.module.css'
 import Filter from './components/Filter'
+import { API } from '../../utils/api'
 
 // 获取当前定位城市信息
 const { label } = JSON.parse(localStorage.getItem('hkzf_city'))
 export default class HouseList extends React.Component {
+
+  // 获取房屋列表数据
+  async searchHouseList() {
+    const { value } = localStorage.getItem('hkzf_city')
+    const res = await API.get('/houses', {
+      params: {
+        cityId: value,
+        ...this.filters,
+        start: 1,
+        end: 20
+      }
+    })
+    console.log(res)
+  }
+  // 接收Filter组件中筛选条件数据
+  onFilter = (filters) => {
+    this.filters = filters
+    this.searchHouseList()
+  }
   render() {
     return (
       <div>
@@ -16,7 +36,7 @@ export default class HouseList extends React.Component {
         <SearchHeader cityName={label} className={styles.searchHeader}></SearchHeader>
       </Flex>
       {/* 条件删选菜单 */}
-      <Filter/>
+      <Filter onFilter={this.onFilter}/>
       </div>
     )
   }
