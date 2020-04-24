@@ -31,7 +31,6 @@ function HouseItem({ src, title, desc, tags, price, onclick}) {
       </div>
     </div>)
 }
-
 HouseItem.propTypes = {
   src: PropTypes.string,
   title: PropTypes.string,

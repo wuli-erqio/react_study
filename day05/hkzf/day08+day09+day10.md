@@ -320,3 +320,20 @@ res.data.body.forEach(item => {
 * 封装HouseItem组件，实现Map和HouseList页面中，房屋列表项的复用
 * 使用HouseItem组件改造Map组件的房屋列表项
 * 使用react-virtualized的List组件渲染房屋列表(参考CityList组件的使用)
+##### 2. 使用WindowScroller跟随页面滚动
+* 默认，List组件只让组件自身出现滚动条，无法让整个页面滚动，也就无法实现标题栏吸顶功能
+* 解决方式： 使用WindowScroller高阶组件，让List组件跟随页面滚动(为List组件提供状态，同时还需要设置List组件autoHeight属性)
+* 注意：WindowScroller高阶组件只能提供height,无法提供width
+* 解决方式： 在WindowScroller组件中使用AutoSizer高阶组件来为List组件提供width
+```
+// height: 视口高度
+// isScrolling： 表示是否滚动中， 用来覆盖List组件自身的滚动状态
+// scrollTop: 页面滚动的距离，用来同步List组件的滚动距离
+<WindowScroller>
+{
+  ({
+    height, isScrolling, scrollTop
+  }) => ( ... )
+}
+</WindowScroller>
+```

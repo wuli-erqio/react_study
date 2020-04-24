@@ -4,7 +4,7 @@ import { Flex } from 'antd-mobile'
 import styles from './index.module.css'
 import Filter from './components/Filter'
 import { API } from '../../utils/api'
-import { List, AutoSizer } from 'react-virtualized'
+import { List, AutoSizer, WindowScroller } from 'react-virtualized'
 import HouseItem from '../../components/HouseItem'
 import { BASE_URL} from '../../utils/url'
 
@@ -76,13 +76,25 @@ export default class HouseList extends React.Component {
       <Filter onFilter={this.onFilter}/>
       {/* 房屋列表 */}
       <div className={styles.houseItem}>
-        <List
-          width={300}
-          height={300}
-          rowCount={this.state.count} // 列表行数
-          rowHeight={120} // 每行高度
-          rowRenderer={this.renderHouseList} // 渲染列表项中的每一行
-        />
+        <WindowScroller>
+          {
+            ({ height, isScrolling, scrollTop}) => (
+              <AutoSizer>
+                {({ width }) => (
+                  <List
+                    autoHeight // 最终列表高度
+                    width={width} // 视口宽度
+                    height={height} // 视口高度
+                    rowCount={this.state.count} // 列表行数
+                    rowHeight={120} // 每行高度
+                    rowRenderer={this.renderHouseList} // 渲染列表项中的每一行
+                    isScrolling={isScrolling}
+                    scrollTop={scrollTop}
+                  />)}
+              </AutoSizer>
+            )
+          }
+        </WindowScroller>
       </div>
       </div>
     )
