@@ -373,3 +373,14 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
 * 判断top是否小于0(是否在可视区内)
 * 如果小于，就添加需要吸顶的样式(fixed)，同时设置占位元素高度(与条件筛选栏高度相同)
 * 否则， 就移除吸顶样式，同时让占位元素高度为0
+##### 3. 通用性优化
+* 问题： 如果Filter组件的高度为100像素，此时，应该怎么处理
+* 处理方式： 修改Sticky组件中，占位元素的高度为100像素
+* 如果其他地方也用到了Sticky组件，高度为88像素，如何处理？
+* 解决方式： 那个地方用到了，将当前高度通过prpos传给组件，组件内部通过props设置高度值
+* 封装原则： 对变化点封装，变化点作为props动态设置
+```
+<Sticky height={40}>
+  <Filter />
+</Sticky>
+```

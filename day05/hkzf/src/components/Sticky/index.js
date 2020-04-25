@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react'
+import PropTypes from 'prop-types'
 import styles from './index.module.css'
 
 class Sticky extends Component {
@@ -6,6 +7,7 @@ class Sticky extends Component {
   placeholder = createRef()
   content = createRef()
   handleScroll = () => {
+    const { height } = this.props
     const placeholderEl = this.placeholder.current
     const contentEl = this.content.current
 
@@ -13,7 +15,7 @@ class Sticky extends Component {
     if(top < 0) {
       // 吸顶
       contentEl.classList.add(styles.fixed)
-      placeholderEl.style.height= '40px'
+      placeholderEl.style.height= `${height}px`
     } else {
       // 不吸顶
       contentEl.classList.remove(styles.fixed)
@@ -38,6 +40,9 @@ class Sticky extends Component {
       </div>
     )
   }
+}
+Sticky.propTypes = {
+  height: PropTypes.number.isRequired
 }
 
 export default Sticky

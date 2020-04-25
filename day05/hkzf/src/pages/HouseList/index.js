@@ -107,7 +107,7 @@ export default class HouseList extends React.Component {
           <SearchHeader cityName={label} className={styles.searchHeader}></SearchHeader>
         </Flex>
         {/* 条件筛选菜单 */}
-        <Sticky>
+        <Sticky height={40}>
           <Filter onFilter={this.onFilter}/>
         </Sticky>
         {/* 房屋列表 */}
