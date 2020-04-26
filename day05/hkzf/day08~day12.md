@@ -396,3 +396,5 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
   window.scrollTo(0, 0)
 ```
 3. 点击条件筛选栏，展开对话框后，页面还会滚动(需求解决：展开对话框后面页面不滚动)
+##### 3. 切换城市显示房源
+1. 切换城市后，该页面无法展示当前定位城市名称和当前城市房屋数据，刷新后页面才会生效(需求解决：切换城市后立即生效)。

@@ -3,6 +3,7 @@ import SearchHeader from '../../components/SearchHeader'
 import { Flex, Toast } from 'antd-mobile'
 import Filter from './components/Filter'
 import { API } from '../../utils/api'
+import { getCurrentCity } from '../../utils/index'
 import { List, AutoSizer, WindowScroller, InfiniteLoader } from 'react-virtualized'
 import HouseItem from '../../components/HouseItem'
 import { BASE_URL} from '../../utils/url'
@@ -11,8 +12,18 @@ import Sticky from '../../components/Sticky'
 import styles from './index.module.css'
 import NoHouse from '../../components/NoHouse'
 
+/*
+  切换城市显示房源
+  原因： 在组件外部的代码只会在项目加载时执行一次。在路由切换时，不会重新执行
+        组件内部的 componentDidMount() 会在组件展示时执行，进入页面一次，执行一次
+  1. 注释获取当前定位城市的代码
+  2. 导入utils中的getCurrentCity方法
+  3. 在componentDidMount中调用，getCurrentCity() 方法来获取当前定位城市的信息
+  4. 将label和value保存到this中
+  5. 用到label和value的地方，使用this.label或this.value来访问
+*/
 // 获取当前定位城市信息
-const { label, value } = JSON.parse(localStorage.getItem('hkzf_city'))
+// const { label, value } = JSON.parse(localStorage.getItem('hkzf_city'))
 export default class HouseList extends React.Component {
   state = {
     // 列表数据
@@ -22,9 +33,15 @@ export default class HouseList extends React.Component {
     // 判断是否在加载中
     isLoading: false
   }
+  // 初始化默认值
+  value = ''
+  label = ''
   // 初始化实例属性
   filters = {}
-  componentDidMount() {
+  async componentDidMount() {
+    const { label, value } = await getCurrentCity()
+    this.label = label
+    this.value = value
     this.searchHouseList()
   }
   // 获取房屋列表数据
@@ -37,7 +54,7 @@ export default class HouseList extends React.Component {
     Toast.loading('加载中...', 0, null, false)
     const res = await API.get('/houses', {
       params: {
-        cityId: value,
+        cityId: this.value,
         ...this.filters,
         start: 1,
         end: 20
@@ -142,7 +159,7 @@ export default class HouseList extends React.Component {
   loadMoreRows = ({ startIndex, stopIndex}) => {
     return new Promise(resolve => { API.get('/houses', {
         params: {
-          cityId: value,
+          cityId: this.value,
           ...this.filters,
           start: startIndex,
           end: stopIndex
@@ -163,7 +180,7 @@ export default class HouseList extends React.Component {
         {/* 顶部搜索栏 */}
         <Flex className={styles.header}>
           <i className="iconfont icon-back" onClick={() => this.props.history.go(-1)}></i>
-          <SearchHeader cityName={label} className={styles.searchHeader}></SearchHeader>
+          <SearchHeader cityName={this.label} className={styles.searchHeader}></SearchHeader>
         </Flex>
         {/* 条件筛选菜单 */}
         <Sticky height={40}>
