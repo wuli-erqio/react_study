@@ -405,3 +405,17 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
 * Github地址：`https://github.com/react-spring/react-spring`
 * 优势1：几乎可以实现任意UI动画效果
 * 优势2：组件式使用方式(render-props模式),简单易用、符合react的声明式特征、性能高
+##### 2. 基本使用
+* 安装：npm install react-spring
+* 打开Spring组件文档
+* 导入Spring组件，使用Spring组件包裹要实现动画效果的遮罩层div
+* 通过render-props模式，将参数props(样式)设置为遮罩层div的style
+* 给Spring组件添加from属性，指定：组件第一次渲染时的动画
+* 给Spring组件添加to属性，指定：组件要更新的新动画状态
+```
+<Spring
+  from={{ opacity: 0 }}
+  to={{ opacity: 1 }}>
+  {props => <div style={props}>要实现的动画内容</div>}
+</Spring>
+```

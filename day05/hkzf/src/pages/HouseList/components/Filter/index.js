@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Spring} from 'react-spring/renderprops'
 import FilterTitle from '../FilterTitle'
 import FilterMore from '../FilterMore'
 import FilterPicker from '../FilterPicker'
@@ -138,7 +139,7 @@ export default class Filter extends Component {
   // 确定
   onSave = (type, value) => {
     this.htmlBody.className = ''
-    
+
     const { titleSelectedStatus } = this.state
     // 创建新的标题选中状态对象
     const newTitleSelectedStatus = { ...titleSelectedStatus }
@@ -266,7 +267,13 @@ export default class Filter extends Component {
         {/* 前三个菜单的遮罩层 */}
         {
           (openType === 'area' || openType === 'mode' || openType === 'price')
-          ? (<div className={styles.mask} onClick={() => this.onCancel(openType)} />) : null
+          ? (
+            <Spring
+              from={{ opacity: 0 }}
+              to={{ opacity: 1 }}>
+              {props => <div style={props} className={styles.mask} onClick={() => this.onCancel(openType)} />}
+            </Spring>
+          ) : null
         }
         <div className={styles.content}>
           {/* 标题 */}
