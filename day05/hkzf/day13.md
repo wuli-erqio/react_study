@@ -52,3 +52,8 @@ class HouseDetail extends Component {
 * 我的页面
 * 封装路由访问控制组件
 **难点：登录访问控制、表单验证**
+## 1.2 用户登录
+### 1. 分析页面结构和样式
+* 复用NavHeader组件设置顶部导航栏
+* WingBlank两翼留白组件
+* WhiteSpace上下留白组件
