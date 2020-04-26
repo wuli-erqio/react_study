@@ -419,3 +419,10 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
   {props => <div style={props}>要实现的动画内容</div>}
 </Spring>
 ```
+##### 3. 实现遮罩层动画
+* 创建方法renderMask来渲染遮罩层div
+* 修改渲染遮罩层的逻辑，保证Spring组件一直被渲染(Spring组件都被销毁了，就无法实现动画效果)
+* 修改to属性的值，在遮罩层隐藏时为0，在遮罩层展示时为1
+* 在render-props的函数内部，判断props.opacity是否定于0
+* 如果等于0，就返回null(不渲染遮罩层)，解决渲染层遮挡页面导致顶部导航失效问题
+* 如果不等于0，渲染遮罩层div
