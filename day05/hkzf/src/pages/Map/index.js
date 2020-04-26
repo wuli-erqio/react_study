@@ -210,22 +210,24 @@ async getHousesList(id) {
     const res = await API.get(`/houses?cityId=${id}`)
     Toast.hide()
     this.setState({
-      houseList: res.data.body.list,
+      housesList: res.data.body.list,
       isShowList: true
     })
   } catch (e) {
     Toast.hide()
   }
-
 }
 renderHousesList() {
-  return this.state.houseList.map(item => ( <HouseItem 
-    key={item.houseCode}
-    src={BASE_URL + item.houseImg}
-    title={item.title}
-    desc={item.desc}
-    tags={item.tags}
-    price={styles.price}/>
+  return this.state.housesList.map(item => (
+    <HouseItem
+      onClick={() => this.props.history.push(`/detail/${item.houseCode}`)}
+      key={item.houseCode}
+      src={BASE_URL + item.houseImg}
+      title={item.title}
+      desc={item.desc}
+      tags={item.tags}
+      price={item.price}
+    />
   ))
 }
 render() {

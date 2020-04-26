@@ -1,10 +1,12 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
+
 import styles from './index.module.css'
 
-function HouseItem({ src, title, desc, tags, price, onclick, style}) {
+function HouseItem({ src, title, desc, tags, price, onClick, style }) {
   return (
-    <div className={styles.house} onClick={onclick} style={style}>
+    <div className={styles.house} onClick={onClick} style={style}>
       <div className={styles.imgWrap}>
         <img className={styles.img} src={src} alt="" />
       </div>
@@ -29,15 +31,17 @@ function HouseItem({ src, title, desc, tags, price, onclick, style}) {
           <span className={styles.priceNum}>{price}</span> 元/月
         </div>
       </div>
-    </div>)
+    </div>
+  )
 }
+
 HouseItem.propTypes = {
   src: PropTypes.string,
   title: PropTypes.string,
   desc: PropTypes.string,
   tags: PropTypes.array.isRequired,
   price: PropTypes.number,
-  onclick: PropTypes.func
+  onClick: PropTypes.func
 }
 
 export default HouseItem
