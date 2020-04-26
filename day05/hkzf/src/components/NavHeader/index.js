@@ -19,16 +19,17 @@ import styles from './index.module.css'
   4. 调用history.go()实现返回上一页的功能
   5. 从props中解构出onLefClick函数，实现自定义 < 按钮的点击事件
 */
-function NavHeader({ children, history, onLeftClick }) {
+function NavHeader({ children, history, onLeftClick, className, rightContent }) {
   // 默认点击行为
   const defaultHander = () => history.go(-1)
 
   return (
     <NavBar
-      className={styles.navBar}
+      className={[styles.navBar, className || ''].join(' ')}
       mode="light"
       icon={<i className="iconfont icon-back" />}
-      onLeftClick={ onLeftClick || defaultHander }
+      onLeftClick={ onLeftClick || defaultHander}
+      rightContent={rightContent}
     >
       {children}
   </NavBar>
