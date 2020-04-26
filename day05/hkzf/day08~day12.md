@@ -398,3 +398,10 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
 3. 点击条件筛选栏，展开对话框后，页面还会滚动(需求解决：展开对话框后面页面不滚动)
 ##### 3. 切换城市显示房源
 1. 切换城市后，该页面无法展示当前定位城市名称和当前城市房屋数据，刷新后页面才会生效(需求解决：切换城市后立即生效)。
+#### 2.13 react-spring动画库
+##### 1. 概述
+* 场景： 展示筛选对话框的时候，实现动画效果，增强用户体验
+* react-spring是基于spring-physics(弹簧物理)的react动画库，动画效果更加流畅、自然
+* Github地址：`https://github.com/react-spring/react-spring`
+* 优势1：几乎可以实现任意UI动画效果
+* 优势2：组件式使用方式(render-props模式),简单易用、符合react的声明式特征、性能高
