@@ -34,3 +34,12 @@ class HouseDetail extends Component {
   }
 }
 ```
+### 3.4 展示房屋详情
+#### 步骤
+  1. 在找房页面中，给每个房源列表项添加单击事件，再点击时转到房屋详情页
+  2. 在单击事件中，获取到当前房屋id
+  3. 根据房屋详情的路由地址，调用history.push()实现路由跳转
+  4. 封装getHouseDetail方法，在componentDidMount中调试该方法
+  5. 在方法中，通过路由参数获取到当前房屋id
+  6. 使用API发送请求，获取房屋数据，保存到state中
+  7. 使用房屋数据，渲染房屋详情

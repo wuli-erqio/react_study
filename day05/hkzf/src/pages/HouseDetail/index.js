@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
-import { Carousel, Flex, Modal, Toast } from 'antd-mobile'
+import { Carousel, Flex, Modal } from 'antd-mobile'
 
 import NavHeader from '../../components/NavHeader'
 import HouseItem from '../../components/HouseItem'
 import HousePackage from '../../components/HousePackage'
 
-import { isAuth, BASE_URL, API } from '../../utils'
+import { BASE_URL } from '../../utils/url'
+import { API } from '../../utils/api'
 
 import styles from './index.module.css'
 
@@ -101,137 +102,26 @@ export default class HouseDetail extends Component {
   }
 
   componentDidMount() {
-    // 获取配置好的路由参数：
-    // console.log('路由参数对象：', this.props.match.params)
-    // console.log(this.props)
-
     // 获取房屋数据
     this.getHouseDetail()
-
-    // 检查房源是否收藏
-    this.checkFavorite()
   }
-
-  // 检查房源是否收藏：
-  async checkFavorite() {
-    const isLogin = isAuth()
-
-    if (!isLogin) {
-      // 没有登录
-      return
-    }
-
-    // 已登录
-    const { id } = this.props.match.params
-    const res = await API.get(`/user/favorites/${id}`)
-
-    const { status, body } = res.data
-    if (status === 200) {
-      // 表示请求已经成功，需要更新 isFavorite 的值
-      this.setState({
-        isFavorite: body.isFavorite
-      })
-    }
-  }
-
-  /* 
-    收藏房源：
-
-    1 给收藏按钮绑定单击事件，创建方法 handleFavorite 作为事件处理程序。
-    2 调用 isAuth 方法，判断是否登录。
-    3 如果未登录，则使用 Modal.alert 提示用户是否去登录。
-    4 如果点击取消，则不做任何操作。
-    5 如果点击去登录，就跳转到登录页面，同时传递 state（登录后，再回到房源收藏页面）。
-    
-    6 根据 isFavorite 判断，当前房源是否收藏。
-    7 如果未收藏，就调用添加收藏接口，添加收藏。
-    8 如果已收藏，就调用删除收藏接口，去除收藏。
-
-    alert('提示', '登录后才能收藏房源，是否去登录?', [
-      { text: '取消' },
-      {
-        text: '去登录',
-        onPress: () => {}
-      }
-    ])
-  */
-
-  handleFavorite = async () => {
-    const isLogin = isAuth()
-    const { history, location, match } = this.props
-
-    if (!isLogin) {
-      // 未登录
-      return alert('提示', '登录后才能收藏房源，是否去登录?', [
-        { text: '取消' },
-        {
-          text: '去登录',
-          // 使用 replace 方法，解决登录后返回详情页面，再点击左上角返回按钮时
-          // 需要点击两次的问题
-          // onPress: () => history.push('/login', { from: location })
-          onPress: () => history.replace('/login', { from: location })
-        }
-      ])
-    }
-
-    // 已登录
-    const { isFavorite } = this.state
-    const { id } = match.params
-
-    if (isFavorite) {
-      // 已收藏，应该删除收藏
-      const res = await API.delete(`/user/favorites/${id}`)
-      // console.log(res)
-      this.setState({
-        isFavorite: false
-      })
-
-      if (res.data.status === 200) {
-        // 提示用户取消收藏
-        Toast.info('已取消收藏', 1, null, false)
-      } else {
-        // token 超时
-        Toast.info('登录超时，请重新登录', 2, null, false)
-      }
-    } else {
-      // 未收藏，应该添加收藏
-      const res = await API.post(`/user/favorites/${id}`)
-      // console.log(res)
-      if (res.data.status === 200) {
-        // 提示用户收藏成功
-        Toast.info('已收藏', 1, null, false)
-        this.setState({
-          isFavorite: true
-        })
-      } else {
-        // token 超时
-        Toast.info('登录超时，请重新登录', 2, null, false)
-      }
-    }
-  }
-
   // 获取房屋详细信息
   async getHouseDetail() {
     const { id } = this.props.match.params
-
     // 开启loading
     this.setState({
       isLoading: true
     })
-
     const res = await API.get(`/houses/${id}`)
-
-    // console.log(res.data.body)
 
     this.setState({
       houseInfo: res.data.body,
       isLoading: false
     })
 
-    const { community, coord } = res.data.body
-
     // 渲染地图
-    this.renderMap(community, coord)
+    const { community, coord } = res.data.body
+    this.renderMap(community,coord)
   }
 
   // 渲染轮播图结构
@@ -241,7 +131,7 @@ export default class HouseDetail extends Component {
     } = this.state
 
     return houseImg.map(item => (
-      <a key={item} href="http://itcast.cn">
+      <a key={item} href="https://github.com/wuli-erqio">
         <img src={BASE_URL + item} alt="" />
       </a>
     ))
@@ -292,8 +182,7 @@ export default class HouseDetail extends Component {
   }
 
   render() {
-    const {
-      isLoading,
+    const { isLoading,
       houseInfo: {
         community,
         title,
@@ -303,10 +192,8 @@ export default class HouseDetail extends Component {
         floor,
         oriented,
         supporting,
-        description
-      },
-      isFavorite
-    } = this.state
+        description},
+        isFavorite} = this.state
     return (
       <div className={styles.root}>
         {/* 导航栏 */}
@@ -390,8 +277,6 @@ export default class HouseDetail extends Component {
         {/* 房屋配套 */}
         <div className={styles.about}>
           <div className={styles.houseTitle}>房屋配套</div>
-          {/* <HousePackage list={supporting} /> */}
-          {/* <div className="title-empty">暂无数据</div> */}
 
           {supporting.length === 0 ? (
             <div className={styles.titleEmpty}>暂无数据</div>

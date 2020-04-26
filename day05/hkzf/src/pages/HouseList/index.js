@@ -101,6 +101,7 @@ export default class HouseList extends React.Component {
 
     return (
       <HouseItem
+        onclick={() => this.props.history.push(`/detail/${house.houseCode}`)}
         key={key}
         style={style}
         src={BASE_URL + house.houseImg}
