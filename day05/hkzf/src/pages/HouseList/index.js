@@ -60,6 +60,8 @@ export default class HouseList extends React.Component {
   }
   // 接收Filter组件中筛选条件数据
   onFilter = (filters) => {
+    // 返回页面顶部
+    window.scrollTo(0, 0)
     this.filters = filters
     this.searchHouseList()
   }

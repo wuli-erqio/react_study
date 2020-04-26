@@ -41,6 +41,8 @@ export default class Filter extends Component {
     selectedValues
   }
   componentDidMount() {
+    // 找到body
+    this.htmlBody = document.body
     this.getFilterData()
   }
 
@@ -57,6 +59,8 @@ export default class Filter extends Component {
   // 点击标题高亮事件
   // this指向问题
   onTitleClick = (type) => {
+    // 给body添加样式
+    this.htmlBody.className = 'body-fixed'
     const {titleSelectedStatus, selectedValues } = this.state
     // 创建新的标题选中状态
     const newTitleSelectedStatus = {...titleSelectedStatus}
@@ -104,6 +108,7 @@ export default class Filter extends Component {
 
   // 取消隐藏对话框
   onCancel = (type) => {
+    this.htmlBody.className = ''
     const { titleSelectedStatus, selectedValues } = this.state
     // 创建新的标题选中状态对象
     const newTitleSelectedStatus = { ...titleSelectedStatus }
@@ -132,6 +137,8 @@ export default class Filter extends Component {
   }
   // 确定
   onSave = (type, value) => {
+    this.htmlBody.className = ''
+    
     const { titleSelectedStatus } = this.state
     // 创建新的标题选中状态对象
     const newTitleSelectedStatus = { ...titleSelectedStatus }
