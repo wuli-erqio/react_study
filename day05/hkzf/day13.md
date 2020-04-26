@@ -57,3 +57,13 @@ class HouseDetail extends Component {
 * 复用NavHeader组件设置顶部导航栏
 * WingBlank两翼留白组件
 * WhiteSpace上下留白组件
+### 2. 登录功能
+* 添加状态： username(账号)、password(密码)
+* 使用受控组件方式获取表单元素值
+* 给form表单添加onSubmit
+* 创建方法handleSubmit, 实现表单提交
+* 在方法中，通过username和password作为参数
+* 使用API调用登录接口，将username和password作为参数
+* 判断返回值status为200时，表示登录成功
+* 登陆成功后，将token保存到本地存储中(hkzf_token)
+* 返回登陆前的页面

@@ -8,48 +8,59 @@ import styles from './index.module.css'
 
 class Login extends Component {
   state = {
-
+    username: '',
+    password: ''
+  }
+  getUsername = e => {
+    this.setState({
+      username: e.target.value
+    })
+  }
+  getPassword = e => {
+    this.setState({
+      password: e.target.value
+    })
+  }
+  // 表单提交数据
+  handleSubmit = e => {
+    // 阻止表单默认行为
+    e.preventDefault()
   }
   render() {
+    const { username, password } = this.state
     return (
       <div className={styles.root}>
         <NavHeader className={styles.navHeader}>账号登陆</NavHeader>
         <WhiteSpace size="xl">
           <WingBlank>
-            <Form>
+            <form onSubmit={this.handleSubmit}>
               {/* 账号 */}
               <div className={styles.formItem}>
-                <Field
+                <input
                   className={styles.input}
+                  value={username}
+                  onChange={this.getUsername}
                   name="username"
                   placeholder="请输入账号"
                 />
               </div>
-              <ErrorMessage
-                className={styles.error}
-                name="username"
-                component="div"
-              />
               {/* 密码 */}
               <div className={styles.formItem}>
-                <Field
+                <input
                   className={styles.input}
+                  value={password}
+                  onChange={this.getPassword}
                   name="password"
                   type="password"
                   placeholder="请输入密码"
                 />
               </div>
-              <ErrorMessage
-                className={styles.error}
-                name="password"
-                component="div"
-              />
               <div className={styles.formSubmit}>
                 <button className={styles.submit} type="submit">
                   登 录
                 </button>
               </div>
-            </Form>
+            </form>
           </WingBlank>
         </WhiteSpace>
         <Flex className={styles.backHome}>
