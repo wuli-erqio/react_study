@@ -384,3 +384,7 @@ isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={remoteRowCount}>
   <Filter />
 </Sticky>
 ```
+#### 2.12 条件筛选栏吸顶功能
+##### 1. 加载提示
+1. 实现加载房源数据：加载中，加载完成的提示(需要解决：没有房源数据时，不弹框提示)
+2. 找不到房源数据时的提示(需要解决：进入页面就展示该提示的问题)
