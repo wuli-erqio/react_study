@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import NavHeader from '../../components/NavHeader'
 import { Flex, WingBlank, WhiteSpace, Toast } from 'antd-mobile'
 import { Link } from 'react-router-dom'
+
+import { API } from '../../utils'
 // 导入withFormik
 import { withFormik, Form, Field, ErrorMessage } from 'formik'
 import styles from './index.module.css'
@@ -22,47 +24,61 @@ class Login extends Component {
     })
   }
   // 表单提交数据
-  handleSubmit = e => {
+  handleSubmit = async e => {
     // 阻止表单默认行为
     e.preventDefault()
+    // 获取账号和密码
+    const { username, password } = this.state
+    const res = await API.post(`/user/login`, {
+      username,
+      password
+    })
+    const { status, body, description } = res.data
+    if(status === 200) {
+      // 登录成功
+      localStorage.setItem('hkzf_token', body.token)
+      this.props.history.go(-1)
+    } else {
+      // 登陆失败
+      Toast.info(description, 2, null, false)
+    }
   }
   render() {
     const { username, password } = this.state
     return (
       <div className={styles.root}>
         <NavHeader className={styles.navHeader}>账号登陆</NavHeader>
-        <WhiteSpace size="xl">
-          <WingBlank>
-            <form onSubmit={this.handleSubmit}>
-              {/* 账号 */}
-              <div className={styles.formItem}>
-                <input
-                  className={styles.input}
-                  value={username}
-                  onChange={this.getUsername}
-                  name="username"
-                  placeholder="请输入账号"
-                />
-              </div>
-              {/* 密码 */}
-              <div className={styles.formItem}>
-                <input
-                  className={styles.input}
-                  value={password}
-                  onChange={this.getPassword}
-                  name="password"
-                  type="password"
-                  placeholder="请输入密码"
-                />
-              </div>
-              <div className={styles.formSubmit}>
-                <button className={styles.submit} type="submit">
-                  登 录
-                </button>
-              </div>
-            </form>
-          </WingBlank>
-        </WhiteSpace>
+        <WhiteSpace size="xl" />
+        <WingBlank>
+          <form onSubmit={this.handleSubmit}>
+            {/* 账号 */}
+            <div className={styles.formItem}>
+              <input
+                className={styles.input}
+                value={username}
+                onChange={this.getUsername}
+                name="username"
+                placeholder="请输入账号"
+              />
+            </div>
+            {/* 密码 */}
+            <div className={styles.formItem}>
+              <input
+                className={styles.input}
+                value={password}
+                onChange={this.getPassword}
+                name="password"
+                type="password"
+                placeholder="请输入密码"
+              />
+            </div>
+            <div className={styles.formSubmit}>
+              <button className={styles.submit} type="submit">
+                登 录
+              </button>
+            </div>
+          </form>
+        </WingBlank>
         <Flex className={styles.backHome}>
           <Flex.Item>
             <Link to="/registe">还没有账号，去注册~</Link>
