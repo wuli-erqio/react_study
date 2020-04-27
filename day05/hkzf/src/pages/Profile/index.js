@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Grid } from 'antd-mobile'
+import { Button, Grid, Modal } from 'antd-mobile'
 
-import { BASE_URL, isAuth, getToken, API } from '../../utils'
+import { BASE_URL, isAuth, getToken, API, removeToken } from '../../utils'
 
 import styles from './index.module.css'
 
@@ -15,6 +15,7 @@ const menus = [
   {id: 6, name: '联系我们', iconfont: 'icon-cust'}
 ]
 
+const alert = Modal.alert
 // 默认头像
 const DEFAULT_AVATAR = BASE_URL + '/img/profile/avatar.png'
 export default class Profile extends Component {
@@ -51,6 +52,29 @@ export default class Profile extends Component {
         }
       })
     }
+  }
+  // 退出
+  logout = () =>  {
+    alert('提示', '是否确定退出', [
+      { text: '取消'},
+      { text: '退出', onPress: async () => {
+        // 调用退出接口
+        await API.post(`/user/logout`, null, {
+          headers: {
+            authorization: getToken()
+          }
+        })
+        // 移除本地Token
+        removeToken()
+        this.setState({
+          isLogin: false,
+          userInfo: {
+            avatar: '',
+            nickname: ''
+          }
+        })
+      }}
+    ])
   }
   render() {
     const { history } = this.props
