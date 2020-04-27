@@ -32,6 +32,7 @@ export default class Profile extends Component {
   componentDidMount() {
     this.getUserInfo()
   }
+  // 获取个人资料
   async getUserInfo () {
     if(!this.state.isLogin) {
       // 未登录
@@ -39,9 +40,9 @@ export default class Profile extends Component {
     } 
     // 发送请求
     const res = await API.get('/user', {
-      headers: {
-        authorization: getToken()
-      }
+      // headers: {
+      //   authorization: getToken()
+      // }
     })
     if(res.data.status === 200) {
       const { avatar, nickname } = res.data.body
@@ -50,6 +51,11 @@ export default class Profile extends Component {
           avatar: BASE_URL + avatar,
           nickname
         }
+      })
+    } else {
+      // token失效, 这种情况下，应该把isLogin设置成false
+      this.setState({
+        isLogin: false
       })
     }
   }
