@@ -6,8 +6,7 @@ import NavHeader from '../../components/NavHeader'
 import HouseItem from '../../components/HouseItem'
 import HousePackage from '../../components/HousePackage'
 
-import { BASE_URL } from '../../utils/url'
-import { API } from '../../utils/api'
+import { BASE_URL, API, isAuth } from '../../utils'
 
 import styles from './index.module.css'
 
@@ -104,6 +103,24 @@ export default class HouseDetail extends Component {
   componentDidMount() {
     // 获取房屋数据
     this.getHouseDetail()
+    // 检查房源是否收藏
+    this.checkFavorite()
+  }
+
+  async checkFavorite() {
+    const isLogin = isAuth()
+    if(!isLogin) {
+      // 未登录
+      return 
+    }
+    const { id } = this.props.match.params
+    const res = await API.get(`/user/favorites/${id}`)
+    const { status, body } = res.data
+    if(status === 200) {
+      this.setState({
+        isFavorite: body.isFavorite
+      })
+    }
   }
   // 获取房屋详细信息
   async getHouseDetail() {
