@@ -8,6 +8,7 @@ import CityList from './pages/CityList'
 import Map from './pages/Map'
 import HouseDetail from './pages/HouseDetail'
 import Login from './pages/Login';
+import Registe from './pages/Registe';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/citylist" component={CityList}></Route>
         <Route path="/map" component={Map}></Route>
         <Route path="/login" component={Login}></Route>
+        <Route path="/registe" component={Registe}></Route>
 
         {/* 房屋详情的路由规则 */}
         <Route path="/detail/:id" component={HouseDetail} />
