@@ -75,6 +75,15 @@ Login = withFormik({
     if(status === 200) {
       // 登录成功
       localStorage.setItem('hkzf_token', body.token)
+      if (!props.location.state) {
+        // 此时，表示是直接进入到了该页面，直接调用 go(-1) 即可
+        props.history.go(-1)
+      } else {
+        // push：[home, login, map]
+        // replace: [home, map]
+        props.history.replace(props.location.state.from.pathname)
+      }
+
       // 无法在该方法中，通过this来获取到路由的信息
       // 所以，需要通过第二个对象参数中获取到props来使用props
       props.history.go(-1)
