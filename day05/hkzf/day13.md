@@ -169,3 +169,11 @@ state = {
   userInfo: {...}
 }
 ```
+### 3. 功能实现
+* 在state中添加两个状态： isLogin(是否登录)和userInfo(用户信息)
+* 从utils中导入isLogin(登录状态)、getToken(获取token)
+* 创建方法getUserInfo，用来获取个人资料
+* 在方法中，通过isLogin判断用户是否登录
+* 如果没有登陆，则不发送请求，渲染未登录信息
+* 如果已登录，就根据接口发送请求，获取用户个人资料
+* 渲染个人资料数据

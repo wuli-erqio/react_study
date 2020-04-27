@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Grid } from 'antd-mobile'
 
-import { BASE_URL } from '../../utils'
+import { BASE_URL, isAuth, getToken, API } from '../../utils'
 
 import styles from './index.module.css'
 
@@ -18,8 +18,43 @@ const menus = [
 // 默认头像
 const DEFAULT_AVATAR = BASE_URL + '/img/profile/avatar.png'
 export default class Profile extends Component {
+  state = {
+    // 是否登录
+    isLogin: isAuth(),
+    // 用户信息
+    userInfo: {
+      avatar: '',
+      nickname: ''
+    }
+  }
+
+  componentDidMount() {
+    this.getUserInfo()
+  }
+  async getUserInfo () {
+    if(!this.state.isLogin) {
+      // 未登录
+      return
+    } 
+    // 发送请求
+    const res = await API.get('/user', {
+      headers: {
+        authorization: getToken()
+      }
+    })
+    if(res.data.status === 200) {
+      const { avatar, nickname } = res.data.body
+      this.setState({
+        userInfo: {
+          avatar: BASE_URL + avatar,
+          nickname
+        }
+      })
+    }
+  }
   render() {
     const { history } = this.props
+    const { isLogin, userInfo: { avatar, nickname} } = this.state
     return (
       <div className={styles.root}>
         {/* 个人信息 */}
@@ -30,17 +65,34 @@ export default class Profile extends Component {
             alt="背景图"/>
           <div className={styles.info}>
             <div className={styles.myIcon}>
-              <img className={styles.avatar} src={DEFAULT_AVATAR} alt="icon"></img>
+              <img className={styles.avatar} src={ avatar === null || DEFAULT_AVATAR } alt="icon"></img>
             </div>
             <div className={styles.user}>
-              <div className={styles.name}>游客</div>
-              <div className={styles.edit}>
-                <Button
-                  type="primary"
-                  size="small"
-                  inline
-                  onClick={() => history.push('/login')}>去登录</Button>
-              </div>
+              <div className={styles.name}>{ nickname || '游客'}</div>
+              {
+                isLogin ? (
+                  // 已登录
+                  <>
+                    <div className={styles.auth}>
+                      <span onClick={this.logout}>退出</span>
+                    </div>
+                    <div className={styles.edit}>
+                      编辑个人资料
+                      <span className={styles.arrow}>
+                        <i className="iconfont icon-arrow"></i>
+                      </span>
+                    </div>
+                  </>
+                  // 未登录
+                ) : (<div className={styles.edit}>
+                  <Button
+                    type="primary"
+                    size="small"
+                    inline
+                    onClick={() => history.push('/login')}>去登录</Button>
+                </div>
+                )
+              }
             </div>
           </div>
         </div>
@@ -62,7 +114,7 @@ export default class Profile extends Component {
         )}/>
         {/* 加入我们 */}
         <div className={styles.ad}>
-          <img src={BASE_URL + '/image/profile/join.png'} alt=""></img>
+          <img src={BASE_URL + '/img/profile/join.png'} alt="" />
         </div>
       </div>
     )
