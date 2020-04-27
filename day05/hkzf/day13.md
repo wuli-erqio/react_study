@@ -140,3 +140,17 @@ errors.username && touched.username && (
   <div className={styles.error}> {errors.username}> </div>
 )
 ```
+### 5. 简化表单处理
+* 导入Form组件，替换form元素，去掉onSubmit
+```
+<Form>...省略表单结构</Form>
+```
+* 导入Field组件，替换掉input表单元素，去掉onChange、onBlur、value
+```
+<Field type="text" name="username" placeholder="" className="" />
+```
+* 导入ErrorMessage组件，替换原来的错误逻辑代码
+```
+<ErrorMessage component="div" name="username" className="" />
+```
+* 去掉所有props

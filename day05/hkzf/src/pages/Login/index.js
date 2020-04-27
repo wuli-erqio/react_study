@@ -12,54 +12,42 @@ import { withFormik, Form, Field, ErrorMessage } from 'formik'
 import styles from './index.module.css'
 
 // 验证规则
-const REG_UNAME = /^[a-zA-Z_\d]{5,8}$s/
-const REG_PWD = /^[a-zA-Z_\d]{5,12}$s/
+const REG_UNAME = /^[a-zA-Z_\d]{5,8}$/
+const REG_PWD = /^[a-zA-Z_\d]{5,12}$/
 
 class Login extends Component {
   render() {
     // 通过props获取到values
-    const { values, handleSubmit, handleChange, handleBlur , errors, touched } = this.props
+    // const { values, handleSubmit, handleChange, handleBlur , errors, touched } = this.props
     return (
       <div className={styles.root}>
-        <NavHeader className={styles.navHeader}>账号登陆</NavHeader>
+        <NavHeader className={styles.navHeader}>账号登录</NavHeader>
         <WhiteSpace size="xl" />
         <WingBlank>
-          <form onSubmit={handleSubmit}>
+          <Form>
             {/* 账号 */}
             <div className={styles.formItem}>
-              <input
+              <Field
                 className={styles.input}
-                value={values.username}
-                onChange={handleChange}
-                onBlur={handleBlur}
                 name="username"
-                placeholder="请输入账号"
-              />
+                placeholder="请输入账号"></Field>
             </div>
-            {
-              errors.username && touched.username && (<div className={styles.error}> {errors.username}</div>)
-            }
+            <ErrorMessage className={styles.error} name="username" component="div"></ErrorMessage>
             {/* 密码 */}
             <div className={styles.formItem}>
-              <input
+            <Field
                 className={styles.input}
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
                 name="password"
-                type="password"
                 placeholder="请输入密码"
-              />
-            {
-              errors.password && touched.password && (<div className={styles.error}> {errors.password} </div>)
-            }
+                type="password"></Field>
+            <ErrorMessage className={styles.error} name="password" component="div"></ErrorMessage>
             </div>
             <div className={styles.formSubmit}>
               <button className={styles.submit} type="submit">
                 登 录
               </button>
             </div>
-          </form>
+          </Form>
         </WingBlank>
         <Flex className={styles.backHome}>
           <Flex.Item>
@@ -97,8 +85,12 @@ Login = withFormik({
   },
   // 表单校验规则
   validationSchema: Yup.object().shape({
-    username: Yup.string().required('账号为必填项').matches(REG_UNAME, '长度为5到8位,只能出现数字、字母、下划线'),
-    password: Yup.string().required('密码为必填项').matches(REG_PWD, '长度为5到12位,只能出现数字、字母、下划线')
+    username: Yup.string()
+      .required('账号为必填项')
+      .matches(REG_UNAME, '长度为5到8位，只能出现数字、字母、下划线'),
+    password: Yup.string()
+      .required('密码为必填项')
+      .matches(REG_PWD, '长度为5到12位，只能出现数字、字母、下划线')
   })
 })(Login)
 // 注意：此处返回的是 高阶组件 包装后的组件
