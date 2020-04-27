@@ -124,3 +124,19 @@ Yup.object().shape({
   username: Yup.string().required('账号为必填项')
 })
 ```
+### 4. 给登录功能添加表单验证
+* 安装： npm i  yup -S
+* 在withFormik中添加配置项validationSchema, 使用Yup添加表单校验规则
+* 在Login组件中，通过props获取到errors(错误信息)和touched(是否访问过，注意：需要给表单元素添加handleBlur处理失焦事件才生效)
+* 在表单元素中通过这两个对象展示表单验证错误信息
+```
+validationSchema: Yup.object().shape({
+  username: Yup.string().required('账号必填项')
+  .matches(REG_UNAME, '长度为5到8位, 只能出现数字、字母、下划线')
+})
+```
+```
+errors.username && touched.username && (
+  <div className={styles.error}> {errors.username}> </div>
+)
+```
