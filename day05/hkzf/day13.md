@@ -88,3 +88,18 @@ handleSubmit = () => {
 * 两种使用方式：
   * 高阶组件(withformik)
   * render-props(<Formik render={() => {}} />)
+### 2. 使用formik重构登录功能
+* 安装：npm install formik --save
+* 导入withFormik,使用withFormik组件包裹Login组件
+* 为withFormik提供配置对象: mapPropsToValues/ handleSubmit
+* 在login组件中，通过props获取到values(表单元素值对象)、handleSubmit、handleChange
+* 使用values提供的值，设置为表单元素的value,使用handleChange设置为表单元素的onChange
+* 使用handleSubmit设置为表单的onSubmit
+* 在handleSubmit中，通过value获取到表单元素的值
+* 在handleSubmit中，完成登录逻辑
+```
+Login = withFormik ({
+  mapPropsToValues: (() => ({username: ''})), // 提供表单项的值
+  handleSubmit: (value, { props }) => {} // 提供表单提交事件
+})(Login)
+```
