@@ -282,3 +282,19 @@ props.history.push('/login', {
 3. 使用AuthRoute组件，配置路由规则
 4. 使用同样的方式，配置Rent/Add房源发布页面，Rent/Search关键词搜索小区信息页面
 5. 给Rent组件的路由规则，添加exact属性(表示精确匹配模式)
+## 3.4 关键词搜索小区信息
+### 1. 实现思路
+* 获取SearchBar搜索栏组件的值(searchTxt)
+* 在搜索栏的change事件中，判断当前值是为空
+* 如果为空，直接return，不做任何处理
+* 如果不为空，就根据当前输入值以及当前的城市id,获取该关键词对应的小区信息
+* 问题： 搜索栏中每输入一个值，就发送一次请求，如何解决？ (对服务器压力大、用户体验不好)
+* 解决方式：使用定时器(setTimeout)延迟执行(关键词：JS文本框输入**防抖**)
+```
+// 先清除定时器
+clearTimerout(this.timerId)
+// 开启定时器，延迟500毫秒发送请求，如果输入间隔小于500毫秒，就不会发送请求
+this.timerId = setTimeout(async () => {
+  await API.get('url...')
+}, 500)
+```
