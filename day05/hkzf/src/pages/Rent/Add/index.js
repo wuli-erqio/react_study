@@ -99,11 +99,15 @@ export default class RentAdd extends Component {
   getValue = (name, value) => {
     this.setState({
       [name]: value,
-    });
-  };
-  handleSupporting = () => {};
-  handleHouseImg = () => {};
-  addHouse = () => {};
+    })
+  }
+  handleSupporting = (selected) => {
+    this.setState({
+      supporting: selected.join('|')
+    })
+  }
+  handleHouseImg = () => {}
+  addHouse = () => {}
   render() {
     const { history } = this.props;
     const {
@@ -203,7 +207,7 @@ export default class RentAdd extends Component {
           renderHeader={() => "房屋配置"}
           data-role="rent-list"
         >
-          <HousePackge select />
+          <HousePackge select onSelect={this.handleSupporting} />
         </List>
         {/* 房屋描述 */}
         <List

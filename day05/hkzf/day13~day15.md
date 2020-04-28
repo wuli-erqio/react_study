@@ -339,3 +339,8 @@ getValue = (name, value) => {
 * 分别给InputItem/TextareaItem/Picker组件，添加onChange配置项
 * 分别调用getValue并传递name和value两个参数(注意：Picker组件中选中值为数组，而接口需要字符串，所以，索引号为0的值即可)
 
+### 4. 获取房屋配置数据
+* 给HousePackge组件，添加onSelect属性
+* 在onSelect处理方法中，通过参数获取到当前选中项的值
+* 根据发布房源接口的参数说明，将获取到的数组类型的选中值，转化为字符串类型
+* 调用setState()更新状态
