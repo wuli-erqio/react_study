@@ -269,3 +269,9 @@ props.history.push('/login', {
 # 3. 发布房源模块
 ## 3.1 功能演示和介绍
 * 功能： 获取房源的小区信息、房源图片的上传、房源发布等
+## 3.2 模板改动说明
+1. 修改首页(index) 去出租连接为： /rent/add
+2. 修改公共组件NoHouse的children属性校验为：node(任何可以渲染的内容)
+3. 修改公共组件HousePackage,添加onSelect属性的默认值
+4. 添加utils/city.js，封装当前定位城市localStorage的操作
+5. 创建了三个页面组件：Rent(已发布房源列表)、Rent/Add(发布房源)、Rent/Search(关键词搜索小区信息)

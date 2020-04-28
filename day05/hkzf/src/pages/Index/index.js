@@ -17,22 +17,22 @@ const navs = [
     id: 1,
     img: Nav1,
     title: '整租',
-    path: 'home/houselist'
+    path: '/home/list'
   },{
     id: 2,
     img: Nav2,
     title: '合租',
-    path: 'home/houselist'
+    path: '/home/list'
   },{
     id: 3,
     img: Nav3,
     title: '地图找房',
-    path: 'home/houselist'
+    path: '/map'
   },{
     id: 4,
     img: Nav4,
     title: '出租',
-    path: 'home/houselist'
+    path: 'rent/add'
   }
 ]
 // 获取地理位置信息
