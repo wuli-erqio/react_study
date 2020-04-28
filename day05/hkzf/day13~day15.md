@@ -319,3 +319,23 @@ this.timerId = setTimeout(async () => {
 * TextareaItem多行输入组件
 * Picker选择器
 * ImagePicker图片选择器
+### 2. 获取房源数据分析
+* InputItem、 TextareaItem、Picker组件，都使用onChange配置项，来获取当前值
+* 处理方式：封装一个事件处理程序getValue来统一获取三种组件的值
+```
+// name 表示要更新的状态
+// value表示当前输入或选中值
+getValue = (name, value) => {
+  this.setState({
+    [name]: value
+  })
+}
+```
+### 3. 获取房源数据步骤
+* 创建方法getValue作为三个组件的事件处理程序
+* 该方法接收两个参数：
+  * name当前状态名
+  * value 当前输入值或选中值
+* 分别给InputItem/TextareaItem/Picker组件，添加onChange配置项
+* 分别调用getValue并传递name和value两个参数(注意：Picker组件中选中值为数组，而接口需要字符串，所以，索引号为0的值即可)
+
