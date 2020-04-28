@@ -15,6 +15,7 @@ import AuthRoute from './components/AuthRoute'
 import Rent from './pages/Rent'
 import RentAdd from './pages/Rent/Add'
 import RentSearch from './pages/Rent/Search'
+import Favorate from './pages/Favorate'
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <AuthRoute exact path="/rent" component={Rent}></AuthRoute>
         <AuthRoute path="/rent/add" component={RentAdd}></AuthRoute>
         <AuthRoute path="/rent/search" component={RentSearch}></AuthRoute>
+        <AuthRoute path="/favorate" component={Favorate}></AuthRoute>
       </div>
     </Router>
   )
