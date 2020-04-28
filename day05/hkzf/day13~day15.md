@@ -356,3 +356,12 @@ getValue = (name, value) => {
 ### 6. 获取房屋图片
 * 给ImagePicker组件添加onChange配置项
 * 通过onChange的参数，获取到上传的图片，并存储到状态tempSlides中
+
+### 7. 上传房屋图片
+* 给提交按钮，绑定单击事件
+* 在事件处理程序中，判断是否有房屋图片
+* 如果没有，不做任何处理
+* 如果有，就创建FormData的实例对象(form)
+* 遍历tempSlides数组，分别将每一个图片对象，添加到form中(键：file, 根据接口文档获得)
+* 调用图片上传接口，传递form参数，并设置请求头Content-Type为multipart/form-data
+* 通过接口返回值获取到图片的路径

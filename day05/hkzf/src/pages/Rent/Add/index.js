@@ -56,7 +56,7 @@ export default class RentAdd extends Component {
     const community = {
       name: "",
       id: "",
-    };
+    }
 
     if (state) {
       // 有小区信息数据，存储到状态中
@@ -93,7 +93,7 @@ export default class RentAdd extends Component {
         // 房屋描述
         description: "",
       },
-    };
+    }
   }
   onCancel = () => {};
   getValue = (name, value) => {
@@ -111,7 +111,22 @@ export default class RentAdd extends Component {
       tempSlides: files
     })
   }
-  addHouse = () => {}
+  addHouse = async () => {
+    const { tempSlides } = this.state
+    let houseImg = ''
+
+    if(tempSlides.length > 0) {
+      // 已经有上传图片的对象
+      const form = new FormData()
+      tempSlides.forEach(item => form.append('file', item.file))
+      const res = await API.post(`/houses/image`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      houseImg = res.data.body.join('|')
+    }
+  }
   render() {
     const { history } = this.props;
     const {
