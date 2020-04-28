@@ -312,3 +312,10 @@ this.timerId = setTimeout(async () => {
 * 在发布房源页面，判断history.loaction.state是否为空
 * 如果为空，不做任何出路
 * 如果不为空，则将小区信息存储到发布房源页面的状态中
+## 3.5 发布房源
+### 1. 页面结构分析
+* List列表组件
+* InputItem文本输入组件
+* TextareaItem多行输入组件
+* Picker选择器
+* ImagePicker图片选择器

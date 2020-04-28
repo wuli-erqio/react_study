@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   text-align: center;
   background: #fff;
+  padding: 0;
 }
 
 .item {

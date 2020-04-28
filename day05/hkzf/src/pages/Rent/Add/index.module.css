@@ -1,5 +1,5 @@
 .root {
-  padding-bottom: 70px;
+  padding-bottom: 50px;
   background-color: #f5f5f9;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .supporting :global(.am-list-body) {
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
   background-color: #f6f5f6;
 }
 
