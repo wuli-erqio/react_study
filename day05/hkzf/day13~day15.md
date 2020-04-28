@@ -275,3 +275,10 @@ props.history.push('/login', {
 3. 修改公共组件HousePackage,添加onSelect属性的默认值
 4. 添加utils/city.js，封装当前定位城市localStorage的操作
 5. 创建了三个页面组件：Rent(已发布房源列表)、Rent/Add(发布房源)、Rent/Search(关键词搜索小区信息)
+## 3.3 配置三个页面的路由规则
+### 实现步骤
+1. 在App.js中导入Rent已发布房源列表页面
+2. 在App.js中导入AuthRoute组件
+3. 使用AuthRoute组件，配置路由规则
+4. 使用同样的方式，配置Rent/Add房源发布页面，Rent/Search关键词搜索小区信息页面
+5. 给Rent组件的路由规则，添加exact属性(表示精确匹配模式)
