@@ -266,3 +266,6 @@ props.history.push('/login', {
   from: props.location
 })
 ```
+# 3. 发布房源模块
+## 3.1 功能演示和介绍
+* 功能： 获取房源的小区信息、房源图片的上传、房源发布等
