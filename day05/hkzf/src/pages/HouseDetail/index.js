@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Carousel, Flex, Modal } from 'antd-mobile'
+import { Carousel, Flex, Modal, Toast } from 'antd-mobile'
 
 import NavHeader from '../../components/NavHeader'
 import HouseItem from '../../components/HouseItem'
@@ -175,6 +175,50 @@ export default class HouseDetail extends Component {
     map.addOverlay(label)
   }
 
+  handleFavorite = async () => {
+    const isLogin = isAuth()
+    const { history, location, match } = this.props
+    if(!isLogin) {
+      return  alert('提示', '登陆后才能收藏房源，是否去登陆', [
+        { text: '取消' },
+        { text: '去登陆', onPress: () => {
+          history.push('/login', {
+            from: location
+          })
+        }}
+      ])
+    }
+    // 已登录
+    const { isFavorite } = this.state
+    const { id } = match.params
+    if(isFavorite) {
+      this.setState({
+        isFavorite: false
+      })
+      // 已收藏，应未删除收藏
+      const res = await API.delete(`/user/favorites/${id}`)
+      if(res.data.status === 200) {
+        // 提示用户取消收藏
+        Toast.info("已取消收藏", 1, null, false)
+      } else {
+        // token 超时
+        Toast.info("登录超时，请重新登陆", 1, null, false)
+      }
+    } else {
+      this.setState({
+        isFavorite: true
+      })
+      // 未收藏，应未添加收藏
+      const res = await API.post(`/user/favorites/${id}`)
+      if(res.data.status === 200) {
+        // 提示用户取消收藏
+        Toast.info("已添加收藏", 1, null, false)
+      } else {
+        // token 超时
+        Toast.info("登录超时，请重新登陆", 1, null, false)
+      }
+    }
+  }
   // 渲染标签
   renderTags() {
     const {
