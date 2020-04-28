@@ -16,14 +16,8 @@
   color: #666;
 }
 
-:global(form div:last-child::after) {
-  height: 0;
-}
-
 .formItem {
   position: relative;
-  display: flex;
-  height: 60px;
   margin-bottom: 9px;
 }
 
@@ -46,8 +40,8 @@
 }
 
 .input {
-  flex: 1;
   height: 60px;
+  width: 100%;
   padding: 2px 0;
   border: 0;
   color: #000;
@@ -59,18 +53,8 @@
   color: #c0c0c0;
 }
 
-.label {
-  width: 85px;
-  height: 60px;
-  line-height: 60px;
-  margin-right: 5px;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 17px;
-}
-
 .formSubmit {
-  margin-top: 18px;
+  margin-top: 27px;
 }
 
 .submit {
