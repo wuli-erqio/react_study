@@ -14,6 +14,12 @@ export default class RentSearch extends Component {
     searchTxt: '',
     tipsList: []
   }
+  onTipsClick = (item) => {
+    this.props.history.replace('/rent/add', {
+      name: item.communityName,
+      id: item.community
+    })
+  }
   handleSearchTxt = (value) => {
     this.setState({ 
       searchTxt: value 
