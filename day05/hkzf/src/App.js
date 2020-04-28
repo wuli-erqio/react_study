@@ -16,6 +16,7 @@ import Rent from './pages/Rent'
 import RentAdd from './pages/Rent/Add'
 import RentSearch from './pages/Rent/Search'
 import Favorate from './pages/Favorate'
+import HouseList from './pages/HouseList';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/detail/:id" component={HouseDetail} />
         <Route path="/login" component={Login}></Route>
         <Route path="/registe" component={Registe}></Route>
+        <Route path="/search" component={HouseList}></Route>
 
         {/* 登陆后才能访问的页面 */}
         <AuthRoute exact path="/rent" component={Rent}></AuthRoute>
