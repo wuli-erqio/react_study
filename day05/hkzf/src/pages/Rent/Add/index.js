@@ -106,7 +106,11 @@ export default class RentAdd extends Component {
       supporting: selected.join('|')
     })
   }
-  handleHouseImg = () => {}
+  handleHouseImg = (files) => {
+    this.setState({
+      tempSlides: files
+    })
+  }
   addHouse = () => {}
   render() {
     const { history } = this.props;
@@ -197,6 +201,7 @@ export default class RentAdd extends Component {
         >
           <ImagePicker
             files={tempSlides}
+            onChange={this.handleHouseImg}
             className={styles.imgpicker}
             multiple={true}
           />

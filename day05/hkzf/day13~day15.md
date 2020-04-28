@@ -352,3 +352,7 @@ getValue = (name, value) => {
   2. 上传图片获取到图片路径(接口返回值)
 * 如何获取房屋图片？ImagePicker图片选择器组件，通过onChange配置项来获取
 * 如何上传房屋图片？根据图片上传接口，将图片转化成FormData数据后在上传，由接口返回图片路径
+
+### 6. 获取房屋图片
+* 给ImagePicker组件添加onChange配置项
+* 通过onChange的参数，获取到上传的图片，并存储到状态tempSlides中
