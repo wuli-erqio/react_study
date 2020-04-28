@@ -298,3 +298,9 @@ this.timerId = setTimeout(async () => {
   await API.get('url...')
 }, 500)
 ```
+### 2. 实现步骤
+* 给SearchBar组件，添加onChange配置项，获取文本框的值
+* 判断当前文本框的值是否为空
+* 如果为空，清空列表，然后return,不在发送请求
+* 如果不为空，使用API发送请求，获取小区数据
+* 使用定时器setTimeout来延迟搜索，提升性能
