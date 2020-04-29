@@ -387,3 +387,15 @@ creat-react-app中隐藏了webpack的配置，隐藏在react-scripts包中
 修改脚手架的webpack配置有两种方式
 * 运行npm run eject释放webpack配置(注意：不可逆操作)
 * 通过第三方重写webpack配置(比如：react-app-rewired等)
+
+## 4.3 项目优化
+### 1. antd-mobile按需加载
+* 打开antd-mobile在create-react-app中使用的文档
+* 安装：npm install react-app-rewired customize-cra --save-dev(用于重写脚手架配置)
+* 修改package.json中的scripts
+* 在项目根目录创建文件：config-overrides.js(用于覆盖脚手架默认配置)
+* 安装：npm install babel-plugin-import --save-dev插件(用于按需加载组件代码和样式)
+* 修改config-overrides.js文件，配置按需加载功能
+* 重启项目(npm run build)
+* 移除index.js中导入的antd-mobile样式文件
+* 将index.css移动到App后面，让index.css中的页面背景色生效
