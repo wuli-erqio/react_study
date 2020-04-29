@@ -414,3 +414,7 @@ const CityList = React.lazy(() => import('./pages/CityList'))
   <Route path='/' component={CityList} />
 </Suspense>
 ```
+### 3. 其他优化和说明
+* React.js优化性能文档
+* react-virtualized只加载用到的组件
+* 脚手架配置代理解决跨域问题(create-react-app)
