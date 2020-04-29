@@ -418,3 +418,9 @@ const CityList = React.lazy(() => import('./pages/CityList'))
 * React.js优化性能文档
 * react-virtualized只加载用到的组件
 * 脚手架配置代理解决跨域问题(create-react-app)
+
+### 总结
+* 登录模块：使用Fomik组件实现了表单处理和表单校验、封装鉴权路由AuthRoute和axios拦截器实现登录访问控制
+* 我的收藏模块：添加、取消收藏
+* 发布房源模块：小区关键词搜索、图片上传、发布房源信息
+* 项目打包和优化：antd-mobile组件库按需加载，基于路由的代码分割实现组件的按需加载，提高了首屏加载速度
