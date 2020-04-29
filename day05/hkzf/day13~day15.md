@@ -381,3 +381,9 @@ getValue = (name, value) => {
 * 输入命令：npm run build,进行项目打包，生成build文件夹(打包好的文件夹)
 * 将bulid目录中的文件内容，部署到服务器中即可
 * 可以通过终端中的提示，使用server -s build 来本地查看(需要全局安装工具serve)
+
+## 4.2 修改脚手架配置说明
+creat-react-app中隐藏了webpack的配置，隐藏在react-scripts包中
+修改脚手架的webpack配置有两种方式
+* 运行npm run eject释放webpack配置(注意：不可逆操作)
+* 通过第三方重写webpack配置(比如：react-app-rewired等)
