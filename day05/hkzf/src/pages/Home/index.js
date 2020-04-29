@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { Component, lazy } from 'react'
 // 导入路由
 import { Route } from 'react-router-dom'
-// 导入页面组件
-import News from '../News'
-import Index from '../Index'
-import Profile from '../Profile'
-import HouseList from '../HouseList'
+
 // 导入tabbar
 import { TabBar } from 'antd-mobile';
 // 导入自己的样式
 import styles from './index.module.css'
+
+// 导入页面组件
+import Index from '../Index'
+const News = lazy(() => import('../News'))
+const Profile = lazy(() => import('../Profile'))
+const HouseList = lazy(() => import('../HouseList'))
 /*
 问题： 点击导航菜单，tabbar并没有高亮
 原因： 原来我们实现该组件的时候，只考虑了点击以及第一次加载组件的情况，但是，我们为您没有考虑
@@ -40,7 +42,7 @@ const tabItems = [
     path: '/home/profile'
   }
 ]
-export default class Home extends React.Component {
+export default class Home extends Component {
   state = {
     // 默认选中的tabbar
     selectedTab: this.props.location.pathname,

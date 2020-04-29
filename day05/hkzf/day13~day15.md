@@ -399,3 +399,18 @@ creat-react-app中隐藏了webpack的配置，隐藏在react-scripts包中
 * 重启项目(npm run build)
 * 移除index.js中导入的antd-mobile样式文件
 * 将index.css移动到App后面，让index.css中的页面背景色生效
+
+### 2. 基于路由路由的代码分隔
+* 目的：将代码按照路由进行分割，只有访问该路由时才加载该路由组件内容，提高首屏加载速度
+* 如何实现？React.lazy()方法 + import()方法、Suspense组件(React-- Code Splitting文档)
+* React.lazy()作用：处理动态导入的组件，让其像普通组件一样使用
+* import('组件路径')作用： 告诉webpack,这是一个代码分割点
+* Suspense组件：用来在动态组件加载完成之前，显示一些loading内容，需要包裹动态组件内容
+```
+const CityList = React.lazy(() => import('./pages/CityList'))
+```
+```
+<Suspense fallback={<div>Loading...</div>}>
+  <Route path='/' component={CityList} />
+</Suspense>
+```
